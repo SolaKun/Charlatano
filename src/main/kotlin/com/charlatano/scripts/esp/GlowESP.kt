@@ -32,7 +32,7 @@ internal fun glowEsp() = every(4) {
 	forEntities {
 		val entity = it.entity
 		if (entity <= 0 || me == entity) return@forEntities
-		
+
 		val glowAddress = it.glowAddress
 		if (glowAddress <= 0) return@forEntities
 		

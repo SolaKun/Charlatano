@@ -41,71 +41,69 @@ import org.jire.arrowhead.Process
 import org.jire.arrowhead.processByName
 
 object CSGO {
-	
+
 	const val ENTITY_SIZE = 16
 	const val GLOW_OBJECT_SIZE = 56
-	
+
 	lateinit var csgoEXE: Process
 		private set
-	
+
 	lateinit var clientDLL: Module
 		private set
 	lateinit var engineDLL: Module
 		private set
 	lateinit var scaleFormDLL: Module
 		private set
-	
+
 	var gameHeight: Int = 0
 		private set
-	
+
 	var gameX: Int = 0
 		private set
-	
+
 	var gameWidth: Int = 0
 		private set
-	
+
 	var gameY: Int = 0
 		private set
-	
+
 	fun initialize() {
 		retry(128) {
 			csgoEXE = processByName("csgo.exe", WinNT.PROCESS_QUERY_INFORMATION
-					or WinNT.PROCESS_VM_READ or WinNT.PROCESS_VM_WRITE)!!
+				or WinNT.PROCESS_VM_READ or WinNT.PROCESS_VM_WRITE)!!
 		}
-		
+
 		retry(128) {
 			csgoEXE.loadModules()
 			clientDLL = csgoEXE.modules["client.dll"]!!
 			engineDLL = csgoEXE.modules["engine.dll"]!!
 			scaleFormDLL = csgoEXE.modules["scaleformui.dll"]!!
 		}
-		
+
 		val rect = WinDef.RECT()
-		val hwd = CUser32.FindWindowA(null, "Counter-Strike: "
-				+ (if (CLASSIC_OFFENSIVE) "Classic" else "Global") + " Offensive")
-		val hwndPointer = hwd.pointer
-		val rectPointer = rect.pointer
-		
+		val user32 = User32.INSTANCE
+		val hwd = user32.FindWindow("Valve001", "Counter-Strike: "
+			+ (if (CLASSIC_OFFENSIVE) "Classic" else "Global") + " Offensive")
+
 		var lastWidth = 0
 		var lastHeight = 0
 		var lastX = 0
 		var lastY = 0
-		
+
 		every(1000) {
-			if (CUser32.GetClientRect(hwndPointer, rectPointer) == 0) System.exit(2)
+			if (!user32.GetClientRect(hwd, rect)) System.exit(2)
 			gameWidth = rect.right - rect.left
 			gameHeight = rect.bottom - rect.top
-			
-			if (CUser32.GetWindowRect(hwd.pointer, rect.pointer) == 0) System.exit(3)
+			if (!user32.GetWindowRect(hwd, rect)) System.exit(3)
 			gameX = rect.left + (((rect.right - rect.left) - gameWidth) / 2)
 			gameY = rect.top + ((rect.bottom - rect.top) - gameHeight)
-			
+
 			if (Overlay.opened && (lastX != gameX || lastY != gameY))
 				User32.INSTANCE.MoveWindow(Overlay.hwnd, gameX, gameY, gameWidth, gameHeight, false)
-			
+
 			if (Overlay.opened && CharlatanoOverlay.created && (lastWidth != gameWidth || lastHeight != gameHeight))
 				camera.setToOrtho(true, gameWidth.toFloat(), gameHeight.toFloat())
-			
+
 			lastWidth = gameWidth
 			lastHeight = gameHeight
 			lastX = gameX
@@ -117,22 +115,22 @@ object CSGO {
 			paused = hwdPointerValue != CUser32.GetForegroundWindow()
 			if (paused) return@every
 		}
-		
+
 		NetVars.load()
-		
+
 		retry(16) {
 			var myAddress = clientDLL.uint(dwLocalPlayer)
 			if (myAddress <= 0) {
 				dwLocalPlayer = dwLocalPlayer + 0x1C // can't do dwLocalPlayer += 0x1C because of compiler bug...
 				myAddress = clientDLL.uint(dwLocalPlayer)
 			}
-			
+
 			val enginePointer = engineDLL.uint(dwClientState)
 			val inGame = csgoEXE.int(enginePointer + dwInGame) == 6
 			paused = !inGame || myAddress <= 0
 		}
-		
+
 		constructEntities()
 	}
-	
+
 }

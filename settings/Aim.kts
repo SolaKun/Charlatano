@@ -35,7 +35,7 @@ ACTIVATE_FROM_FIRE_KEY = true
  * By default, this uses the backward mouse button
  * (button 5, the button on the bottom left of gaming mice).
  */
-FORCE_AIM_KEY = 5
+FORCE_AIM_KEY = 6
 
 /**
  * The field of view of the aimbot, in degrees (0 to 360).

@@ -22,7 +22,6 @@ import com.charlatano.game.CSGO.gameHeight
 import com.charlatano.game.CSGO.gameWidth
 import com.charlatano.game.CSGO.gameX
 import com.charlatano.game.CSGO.gameY
-import com.charlatano.game.angle
 import com.charlatano.game.clientState
 import com.charlatano.game.setAngle
 import com.charlatano.settings.GAME_PITCH
@@ -72,7 +71,7 @@ fun pathAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Int,
             randomSleepMax: Int = 10, staticSleep: Int = 2,
             sensMultiplier: Double = 1.0, perfect: Boolean = false) {
 	if (!destinationAngle.isValid()) return
-	
+
 	val delta = delta.get()
 	delta.set(currentAngle.y - destinationAngle.y, currentAngle.x - destinationAngle.x, 0.0)
 	
@@ -87,7 +86,7 @@ fun pathAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Int,
 	
 	val target = target.get()
 	target.set((mousePos.x + (dx / 2)).toInt(), (mousePos.y + (dy / 2)).toInt())
-	
+
 	if (target.x <= 0 || target.x >= gameX + gameWidth
 			|| target.y <= 0 || target.y >= gameY + gameHeight) return
 	
