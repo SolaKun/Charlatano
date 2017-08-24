@@ -14,21 +14,22 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
+ 
+package com.charlatano.settings
 
-import com.charlatano.settings.*
+import java.awt.event.KeyEvent
 
-/**
- * The field of view (in degrees, 0 to 360) for the bone trigger.
- */
-BONE_TRIGGER_FOV = 12
 
-/**
- * The bone to automatically fire at for the bone trigger.
- */
-BONE_TRIGGER_BONE = HEAD_BONE
-
-/**
- * The amount of time to take between clicks
- */
-DELAY_BETWEEN_SHOTS = 200
+var TOGGLE_KEY_AIM = KeyEvent.VK_NUMPAD1
+var HOLD_TOGGLE_AIM = false
+var TOGGLE_KEY_RCS = KeyEvent.VK_NUMPAD2
+var HOLD_TOGGLE_RCS = false
+var TOGGLE_KEY_ESP = KeyEvent.VK_NUMPAD0
+var HOLD_TOGGLE_ESP = false
+var TOGGLE_KEY_BUNNYHOP = KeyEvent.VK_NUMPAD3
+var HOLD_TOGGLE_BUNNYHOP = false
+var TOGGLE_KEY_BONETRIGGER = KeyEvent.VK_NUMPAD4
+var HOLD_TOGGLE_BONETRIGGER = false
+var TOGGLE_KEY_RAGE = KeyEvent.VK_NUMPAD9
+var HOLD_TOGGLE_RAGE = false

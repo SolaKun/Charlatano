@@ -17,18 +17,34 @@
  */
 
 import com.charlatano.settings.*
+import java.awt.event.KeyEvent
 
-/**
- * The field of view (in degrees, 0 to 360) for the bone trigger.
+/*
+ * Key codes can be found @ https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
+ * In order to toggle something you need to hold ALT + the Toggle Key.
+ * Alternatively, if you have HOLD_TOGGLE set to true for that variable you only need to hold the key.
  */
-BONE_TRIGGER_FOV = 12
 
-/**
- * The bone to automatically fire at for the bone trigger.
- */
-BONE_TRIGGER_BONE = HEAD_BONE
+// Aim toggle key.
+TOGGLE_KEY_AIM = KeyEvent.VK_NUMPAD1
+HOLD_TOGGLE_AIM = false
 
-/**
- * The amount of time to take between clicks
- */
-DELAY_BETWEEN_SHOTS = 200
+// RCS toggle key
+TOGGLE_KEY_RCS = KeyEvent.VK_NUMPAD2
+HOLD_TOGGLE_RCS = false
+
+// ESP toggle key
+TOGGLE_KEY_ESP = KeyEvent.VK_NUMPAD0
+HOLD_TOGGLE_ESP = false
+
+// Bunnyhop toggle key.
+TOGGLE_KEY_BUNNYHOP = KeyEvent.VK_NUMPAD3
+HOLD_TOGGLE_BUNNYHOP = false
+
+// BoneTrigger toggle key.
+TOGGLE_KEY_BONETRIGGER = KeyEvent.VK_NUMPAD4
+HOLD_TOGGLE_BONETRIGGER = false
+
+// Rage toggle key.
+TOGGLE_KEY_RAGE = KeyEvent.VK_NUMPAD9
+HOLD_TOGGLE_RAGE = false
