@@ -28,7 +28,7 @@ fun trigger() = every(TRIGGER_DURATION) {
 	forEntities {
 		val entity = it.entity
 		if (entity <= 0 || me == entity || it.type != EntityType.CCSPlayer) return@forEntities
-		
-		
+
+
 	}
 }

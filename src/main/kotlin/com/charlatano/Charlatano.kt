@@ -26,15 +26,7 @@ import com.charlatano.scripts.*
 import com.charlatano.scripts.aim.flatAim
 import com.charlatano.scripts.aim.pathAim
 import com.charlatano.scripts.esp.esp
-import com.charlatano.settings.BOX_ESP
-import com.charlatano.settings.ENABLE_BOMB_TIMER
-import com.charlatano.settings.ENABLE_ESP
-import com.charlatano.settings.SKELETON_ESP
-import com.charlatano.settings.ENABLE_AIM
-import com.charlatano.settings.ENABLE_BUNNY_HOP
-import com.charlatano.settings.ENABLE_RCS
-import com.charlatano.settings.ENABLE_BONE_TRIGGER
-import com.charlatano.settings.ENABLE_RAGE
+import com.charlatano.settings.*
 import com.charlatano.utils.Dojo
 import java.io.File
 import java.io.FileReader
@@ -44,11 +36,11 @@ const val SETTINGS_DIRECTORY = "settings"
 
 fun main(args: Array<String>) {
 	System.setProperty("kotlin.compiler.jar", "kotlin-compiler.jar")
-	
+
 	loadSettings()
-	
+
 	CSGO.initialize()
-	
+
 	bunnyHop()
 	rcs()
 	esp()
@@ -57,19 +49,19 @@ fun main(args: Array<String>) {
 	boneTrigger()
 	reducedFlash()
 	bombTimer()
-	
+
 	Toggles_AIM()
 	Toggles_BUNNYHOP()
 	Toggles_ESP()
 	Toggles_RAGE()
 	Toggles_RCS()
 	Toggles_BONETRIGGER()
-	
+
 	Thread.sleep(10_000) // wait a bit to catch everything
 	System.gc() // then cleanup
-	
+
 	clearScreen()
-	
+
 	val scanner = Scanner(System.`in`)
 	while (!Thread.interrupted()) {
 		System.out.println()
@@ -88,13 +80,13 @@ private fun loadSettings() {
 	File(SETTINGS_DIRECTORY).listFiles().forEach {
 		FileReader(it).use {
 			Dojo.script(it
-					.readLines()
-					.joinToString("\n"))
+				.readLines()
+				.joinToString("\n"))
 		}
 	}
-	
+
 	System.out.println("Loaded settings.")
-	
+
 	val needsOverlay = ENABLE_BOMB_TIMER or (ENABLE_ESP and (SKELETON_ESP or BOX_ESP))
 	if (!Overlay.opened && needsOverlay) Overlay.open()
 }
@@ -105,12 +97,12 @@ private fun resetToggles() {
 	ENABLE_ESP = false
 	ENABLE_RCS = false
 	ENABLE_BONE_TRIGGER = false
-	
+
 	ENABLE_RAGE = false
 	System.out.println("All togglables disabled.")
 }
 
-private fun printToggles(){
+private fun printToggles() {
 	System.out.println("AIM      = " + ENABLE_AIM)
 	System.out.println("BunnyHop = " + ENABLE_BUNNY_HOP)
 	System.out.println("ESP      = " + ENABLE_ESP)

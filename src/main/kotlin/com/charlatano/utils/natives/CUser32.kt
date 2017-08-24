@@ -22,20 +22,20 @@ import com.sun.jna.Native
 import com.sun.jna.Pointer
 
 object CUser32 {
-	
+
 	init {
 		Native.register("user32")
 	}
-	
+
 
 	@JvmStatic
 	external fun GetCursorPos(p: Pointer): Int
-	
+
 
 	@JvmStatic
 	external fun GetForegroundWindow(): Long
-	
+
 	@JvmStatic
 	external fun mouse_event(dwFlags: Int, dx: Int, dy: Int, dwData: Int, dwExtraInfo: Long)
-	
+
 }

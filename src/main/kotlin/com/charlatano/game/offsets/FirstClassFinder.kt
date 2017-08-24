@@ -18,17 +18,17 @@
 
 package com.charlatano.game.offsets
 
-import com.charlatano.game.CSGO.csgoEXE
 import com.charlatano.game.CSGO.clientDLL
+import com.charlatano.game.CSGO.csgoEXE
 import com.charlatano.game.offsets.ClientOffsets.decalname
 import com.charlatano.utils.extensions.uint
 
 fun findDecal(): Long {
 	val mask = ByteArray(4)
 	for (i in 0..3) mask[i] = (((decalname shr 8 * i)) and 0xFF).toByte()
-	
+
 	val memory = Offset.memoryByModule[clientDLL]!!
-	
+
 	var skipped = 0
 	var currentAddress = 0L
 	while (currentAddress < clientDLL.size - mask.size) {
@@ -42,7 +42,7 @@ fun findDecal(): Long {
 		}
 		currentAddress++
 	}
-	
+
 	return -1L
 }
 

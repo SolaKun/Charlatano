@@ -19,9 +19,9 @@
 package com.charlatano.game
 
 enum class Weapons(val id: Int, val automatic: Boolean = false, val grenade: Boolean = false,
-                   val knife: Boolean = false, val sniper: Boolean = false, val boltAction: Boolean = false,
-                   val pistol: Boolean = false, val shotgun: Boolean = false) {
-	
+				   val knife: Boolean = false, val sniper: Boolean = false, val boltAction: Boolean = false,
+				   val pistol: Boolean = false, val shotgun: Boolean = false) {
+
 	NONE(0),
 	DESERT_EAGLE(1, pistol = true),
 	DUAL_BERRETA(2, pistol = true),
@@ -76,13 +76,13 @@ enum class Weapons(val id: Int, val automatic: Boolean = false, val grenade: Boo
 	KNIFE_BOWIE(514, knife = true),
 	KNIFE_BUTTERFLY(515, knife = true),
 	KNIFE_PUSH(516, knife = true);
-	
+
 	companion object {
-		
+
 		private val cachedValues = values()
-		
+
 		operator fun get(id: Int) = cachedValues.firstOrNull { it.id == id } ?: NONE
-		
+
 	}
-	
+
 }

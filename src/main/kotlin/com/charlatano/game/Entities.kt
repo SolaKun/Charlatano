@@ -18,11 +18,11 @@
 
 package com.charlatano.game
 
-import com.charlatano.settings.MAX_ENTITIES
 import com.charlatano.game.entity.Entity
 import com.charlatano.game.entity.EntityType
 import com.charlatano.game.entity.Player
 import com.charlatano.game.entity.bone
+import com.charlatano.settings.MAX_ENTITIES
 import com.charlatano.utils.Angle
 import com.charlatano.utils.collections.CacheableList
 import com.charlatano.utils.collections.ListContainer
@@ -46,7 +46,7 @@ val entitiesValues = arrayOfNulls<CacheableList<EntityContext>>(MAX_ENTITIES)
 var entitiesValuesCounter = 0
 
 val entities: Object2ObjectMap<EntityType, CacheableList<EntityContext>>
-		= EntityList(EntityType.size).apply {
+	= EntityList(EntityType.size).apply {
 	for (type in EntityType.cachedValues) {
 		val cacheableList = CacheableList<EntityContext>(MAX_ENTITIES)
 		put(type, cacheableList)
@@ -57,10 +57,10 @@ val entities: Object2ObjectMap<EntityType, CacheableList<EntityContext>>
 fun entityByType(type: EntityType): EntityContext? = entities[type]?.firstOrNull()
 
 internal inline fun forEntities(types: Array<EntityType> = EntityType.cachedValues,
-                                crossinline body: (EntityContext) -> Unit) {
+								crossinline body: (EntityContext) -> Unit) {
 	val hash = Arrays.hashCode(types)
 	val container = cachedResults.get(hash) ?: EntityContainer(EntityType.size)
-	
+
 	if (container.empty()) {
 		for (type in types) if (type != EntityType.NULL) {
 			val cacheableList = entities[type]!!
@@ -68,7 +68,7 @@ internal inline fun forEntities(types: Array<EntityType> = EntityType.cachedValu
 			cachedResults.put(hash, container)
 		}
 	}
-	
+
 	container.forEach(body)
 }
 

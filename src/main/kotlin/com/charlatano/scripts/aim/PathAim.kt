@@ -20,11 +20,13 @@ package com.charlatano.scripts.aim
 
 import com.charlatano.game.entity.isScoped
 import com.charlatano.game.me
-import com.charlatano.settings.*
+import com.charlatano.settings.AIM_DURATION
+import com.charlatano.settings.AIM_STRICTNESS
+import com.charlatano.settings.ENABLE_PATH_AIM
 import com.charlatano.utils.pathAim
 
 fun pathAim() = aimScript(AIM_DURATION, { ENABLE_PATH_AIM }) { dest, current, aimSpeed ->
 	pathAim(current, dest, aimSpeed,
-			sensMultiplier = if (me.isScoped()) 1.0 else AIM_STRICTNESS,
-			perfect = perfect.getAndSet(false))
+		sensMultiplier = if (me.isScoped()) 1.0 else AIM_STRICTNESS,
+		perfect = perfect.getAndSet(false))
 }

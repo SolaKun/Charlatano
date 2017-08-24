@@ -16,7 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.charlatano.settings.*
+import com.charlatano.settings.RCS_DURATION
+import com.charlatano.settings.RCS_MAX
+import com.charlatano.settings.RCS_MIN
+import com.charlatano.settings.RCS_SMOOTHING
 
 /**
  * The range of recoil control you want to have applied.

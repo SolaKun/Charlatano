@@ -22,7 +22,7 @@ import com.charlatano.game.*
 import com.charlatano.game.entity.*
 import com.charlatano.game.entity.EntityType.Companion.ccsPlayer
 import com.charlatano.game.offsets.ScaleFormOffsets
-import com.charlatano.scripts.*
+import com.charlatano.scripts.click
 import com.charlatano.settings.*
 import com.charlatano.utils.*
 import org.jire.arrowhead.keyPressed
@@ -41,78 +41,77 @@ internal fun reset() {
 }
 
 internal fun findTarget(position: Angle, angle: Angle, allowPerfect: Boolean,
-                        lockFOV: Int = AIM_FOV, boneID: Int = HEAD_BONE): Player {
+						lockFOV: Int = AIM_FOV, boneID: Int = HEAD_BONE): Player {
 	var closestDelta = Double.MAX_VALUE
 	var closestPlayer = -1L
 	var FOV = lockFOV
 	if (keyPressed(FORCE_AIM_KEY) && FOV != BONE_TRIGGER_FOV)
 		FOV = FORCE_AIM_FOV
-	
+
 	var closestFOV = Double.MAX_VALUE
-	
+
 	forEntities(ccsPlayer) {
 		val entity = it.entity
 		if (entity <= 0) return@forEntities
 		if (ENABLE_RAGE && keyPressed(FORCE_AIM_KEY) && entity.canShootWall()) FOV = 360
 		else if (!entity.canShoot()) return@forEntities
-		
+
 		val ePos: Angle = entity.bones(boneID)
 		val distance = position.distanceTo(ePos)
-		
+
 		val dest = calculateAngle(me, ePos)
-		
+
 		val pitchDiff = Math.abs(angle.x - dest.x)
 		val yawDiff = Math.abs(angle.y - dest.y)
 		val delta = Math.abs(Math.sin(Math.toRadians(yawDiff)) * distance)
 		val fovDelta = Math.abs((Math.sin(Math.toRadians(pitchDiff)) + Math.sin(Math.toRadians(yawDiff))) * distance)
-		
+
 		if (fovDelta <= FOV || ENABLE_RAGE) {
-			if (delta < closestDelta)
-			{
+			if (delta < closestDelta) {
 				closestDelta = delta
 				closestPlayer = entity
 				closestFOV = fovDelta
 			}
 		}
 	}
-	
+
 	if (closestDelta == Double.MAX_VALUE || closestDelta < 0 || closestPlayer < 0) return -1
-	
+
 	if (PERFECT_AIM && allowPerfect && closestFOV <= PERFECT_AIM_FOV && randInt(100 + 1) <= PERFECT_AIM_CHANCE)
 		perfect.set(true)
-	
+
 	return closestPlayer
 }
 
 internal fun Entity.canShoot()
-		= spotted()
-		&& !dormant()
-		&& !dead()
-		&& me.team() != team()
-		&& !me.dead()
-		
+	= spotted()
+	&& !dormant()
+	&& !dead()
+	&& me.team() != team()
+	&& !me.dead()
+
 internal fun Entity.canShootWall()
-		= !dormant()
-		&& !dead()
-		&& me.team() != team()
-		&& !me.dead()
+	= !dormant()
+	&& !dead()
+	&& me.team() != team()
+	&& !me.dead()
 
 internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boolean,
-                                  crossinline doAim: (destinationAngle: Angle,
-                                                      currentAngle: Angle, aimSpeed: Int) -> R)
-		= every(duration) {
+								  crossinline doAim: (destinationAngle: Angle,
+													  currentAngle: Angle, aimSpeed: Int) -> R)
+	= every(duration) {
 	if (!precheck()) return@every
-	
+
 	val aim = ACTIVATE_FROM_FIRE_KEY && keyPressed(FIRE_KEY)
 	val forceAim = keyPressed(FORCE_AIM_KEY)
 	val pressed = aim or forceAim or ENABLE_RAGE
 	var currentTarget = target.get()
-	
+
 	if (!pressed || CSGO.scaleFormDLL.boolean(ScaleFormOffsets.bCursorEnabled)) {
 		reset()
 		return@every
 	}
-	
+
 	/*if (!CLASSIC_OFFENSIVE) {
 		val weapon = me.weapon()
 		if (!weapon.pistol && !weapon.automatic && !weapon.shotgun && !weapon.sniper) {
@@ -120,9 +119,9 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 			return@every
 		}
 	}*/ // good meme
-	
+
 	val currentAngle = clientState.angle()
-	
+
 	val position = me.position()
 	if (currentTarget < 0) {
 		currentTarget = findTarget(position, currentAngle, aim)
@@ -132,7 +131,7 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 		}
 		target.set(currentTarget)
 	}
-	
+
 	if (!currentTarget.canShootWall()) {
 		reset()
 		Thread.sleep(16 + randLong(16))
@@ -140,20 +139,20 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 		val weapon = me.weapon()
 		val boneID = bone.get()
 		val bonePosition = currentTarget.bones(boneID)
-		
+
 		val destinationAngle = calculateAngle(me, bonePosition)
 		if (AIM_ASSIST_MODE) destinationAngle.finalize(currentAngle, AIM_ASSIST_STRICTNESS / 100.0)
-		
+
 		val aimSpeed = AIM_SPEED_MIN + randInt(AIM_SPEED_MAX - AIM_SPEED_MIN)
 		if (!ENABLE_RAGE)
 			doAim(destinationAngle, currentAngle, aimSpeed)
-		else{
+		else {
 			if (weapon.sniper && !me.isScoped())
 				return@every
 			doAim(destinationAngle, currentAngle, 1)
 			if (currentTarget.canShoot())
 				click()
-			else 
+			else
 				reset()
 		}
 	}

@@ -22,7 +22,7 @@ package com.charlatano.settings
  * The range of recoil control you want to have applied.
  *
  * If both values are equal, there will be no randomization.
- * 
+ *
  * Having imperfect RCS will greatly lower league ban rate.
  */
 var RCS_MIN = 1.88

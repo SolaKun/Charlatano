@@ -21,7 +21,9 @@ package com.charlatano.scripts
 import com.charlatano.game.hooks.onGround
 import com.charlatano.settings.BUNNY_HOP_KEY
 import com.charlatano.settings.ENABLE_BUNNY_HOP
-import com.charlatano.utils.*
+import com.charlatano.utils.mouseWheel
+import com.charlatano.utils.randInt
+import com.charlatano.utils.randLong
 import org.jire.arrowhead.keyPressed
 
 fun bunnyHop() = onGround {
