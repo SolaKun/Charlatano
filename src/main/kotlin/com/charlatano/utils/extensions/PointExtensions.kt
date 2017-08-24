@@ -18,7 +18,7 @@
 
 package com.charlatano.utils.extensions
 
-import com.charlatano.utils.natives.CUser32
+import com.sun.jna.platform.win32.User32
 import com.sun.jna.platform.win32.WinDef
 import java.lang.Math.sqrt
 
@@ -27,7 +27,7 @@ fun WinDef.POINT.set(x: Int, y: Int) = apply {
 	this.y = y
 }
 
-fun WinDef.POINT.refresh() = apply { CUser32.GetCursorPos(this.pointer) }
+fun WinDef.POINT.refresh() = apply { User32.INSTANCE.GetCursorPos(this) }
 
 fun WinDef.POINT.distance(b: WinDef.POINT): Double {
 	val px = (b.x - this.x).toDouble()

@@ -29,10 +29,8 @@ import com.charlatano.overlay.Overlay
 import com.charlatano.settings.CLASSIC_OFFENSIVE
 import com.charlatano.utils.every
 import com.charlatano.utils.extensions.uint
-import com.charlatano.utils.natives.CUser32
 import com.charlatano.utils.paused
 import com.charlatano.utils.retry
-import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.User32
 import com.sun.jna.platform.win32.WinDef
 import com.sun.jna.platform.win32.WinNT
@@ -109,10 +107,8 @@ object CSGO {
 			lastX = gameX
 			lastY = gameY
 		}
-		val hwdPointer = hwd.pointer
-		val hwdPointerValue = Pointer.nativeValue(hwdPointer)
 		every(1024, continuous = true) {
-			paused = hwdPointerValue != CUser32.GetForegroundWindow()
+			paused = hwd.pointer != user32.GetForegroundWindow().pointer
 			if (paused) return@every
 		}
 

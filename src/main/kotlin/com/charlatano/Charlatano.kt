@@ -112,9 +112,6 @@ private fun printToggles() {
 }
 
 private fun clearScreen() {
-	repeat(512) { _ ->
-		System.out.print("\n")
-	}
 	System.out.println("  =============+========+=========================")
 	System.out.println(" | Command     | Alias  | Function                |");
 	System.out.println("  =============+========+=========================")
