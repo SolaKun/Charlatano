@@ -18,14 +18,13 @@
 
 package com.charlatano.utils
 
-import org.jetbrains.kotlin.script.jsr223.KotlinJsr223JvmLocalScriptEngineFactory
 import javax.script.ScriptEngine
+import javax.script.ScriptEngineManager
 import kotlin.reflect.KProperty
 
 object Dojo {
 
-	val factory = KotlinJsr223JvmLocalScriptEngineFactory()
-	val engine: ScriptEngine = factory.scriptEngine
+	val engine: ScriptEngine = ScriptEngineManager().getEngineByExtension("kts")
 
 	fun script(script: String): Any? = engine.eval(script)
 
