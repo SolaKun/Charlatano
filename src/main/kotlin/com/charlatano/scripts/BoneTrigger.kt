@@ -22,6 +22,7 @@ import com.charlatano.game.angle
 import com.charlatano.game.clientState
 import com.charlatano.game.entity.position
 import com.charlatano.game.me
+import com.charlatano.scripts.aim.bone
 import com.charlatano.scripts.aim.findTarget
 import com.charlatano.settings.*
 import com.charlatano.utils.*
@@ -30,7 +31,7 @@ import org.jire.arrowhead.keyReleased
 
 private val onBoneTriggerTarget = hook(1) {
 	if (ENABLE_BONE_TRIGGER) findTarget(me.position(), clientState.angle(), false,
-		BONE_TRIGGER_FOV, BONE_TRIGGER_BONE) >= 0
+		BONE_TRIGGER_FOV, bone.get()) >= 0
 	else false
 }
 

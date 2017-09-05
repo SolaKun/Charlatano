@@ -16,20 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.charlatano.settings.BONE_TRIGGER_BONE
 import com.charlatano.settings.BONE_TRIGGER_FOV
 import com.charlatano.settings.DELAY_BETWEEN_SHOTS
-import com.charlatano.settings.HEAD_BONE
 
 /**
  * The field of view (in degrees, 0 to 360) for the bone trigger.
  */
-BONE_TRIGGER_FOV = 60
-
-/**
- * The bone to automatically fire at for the bone trigger.
- */
-BONE_TRIGGER_BONE = HEAD_BONE
+BONE_TRIGGER_FOV = 6
 
 /**
  * The amount of time to take between clicks
