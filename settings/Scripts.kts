@@ -57,7 +57,7 @@ ENABLE_PATH_AIM = false
 /**
  * Enables the bone trigger bot script.
  */
-ENABLE_BONE_TRIGGER = false
+ENABLE_BONE_TRIGGER = true
 
 /**
  * Enables the reduced flash script.

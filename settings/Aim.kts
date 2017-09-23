@@ -41,7 +41,7 @@ FORCE_AIM_KEY = 6
  * The field of view of the aimbot, in degrees (0 to 360).
  */
 AIM_FOV = 120
-FORCE_AIM_FOV = 120
+FORCE_AIM_FOV = 160
 
 /**
  * The aimbot's "playback" speed, the higher the value the slower the playback.
@@ -57,7 +57,7 @@ AIM_SPEED_MAX = 36
  *
  * The minimum value is 1.0
  */
-AIM_STRICTNESS = 1.0
+AIM_STRICTNESS = 2.4
 
 
 

@@ -20,7 +20,6 @@ package com.charlatano.utils
 
 import javax.script.ScriptEngine
 import javax.script.ScriptEngineManager
-import kotlin.reflect.KProperty
 
 object Dojo {
 
@@ -37,15 +36,6 @@ object Dojo {
 
 	operator fun <T> set(name: String, value: T) {
 		engine.eval("$name = $value")
-	}
-
-	class Setting<out T> {
-		private var value: T? = null
-
-		operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
-			if (value == null) value = get<T>(property.name)
-			return value!!
-		}
 	}
 
 }

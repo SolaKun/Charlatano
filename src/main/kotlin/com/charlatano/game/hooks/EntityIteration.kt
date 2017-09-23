@@ -45,7 +45,7 @@ private fun reset() {
 	lastCleanup.set(System.currentTimeMillis())
 }
 
-fun constructEntities() = every(512) {
+fun constructEntities() = every(128) {
 	me = clientDLL.uint(dwLocalPlayer)
 	if (me <= 0) return@every
 

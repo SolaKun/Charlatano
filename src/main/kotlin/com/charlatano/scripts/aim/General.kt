@@ -126,13 +126,12 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 	if (currentTarget < 0) {
 		currentTarget = findTarget(position, currentAngle, aim)
 		if (currentTarget < 0) {
-			Thread.sleep(16 + randLong(16))
 			return@every
 		}
 		target.set(currentTarget)
 	}
 
-	if (!currentTarget.canShootWall()) {
+	if (!currentTarget.canShoot()) {
 		reset()
 		Thread.sleep(16 + randLong(16))
 	} else if (ENABLE_AIM) {
