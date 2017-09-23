@@ -101,7 +101,7 @@ fun Toggles_BONETRIGGER() = every(10) {
 			Thread.sleep(25)
 		} while (keyPressed(TOGGLE_KEY_BONETRIGGER))
 
-		if (HOLD_TOGGLE_RCS)
+		if (HOLD_TOGGLE_BONETRIGGER)
 			ENABLE_BONE_TRIGGER = false
 	}
 }
