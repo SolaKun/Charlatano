@@ -108,7 +108,7 @@ object CSGO {
 			lastY = gameY
 		}
 		every(1024, continuous = true) {
-			paused = hwd.pointer != user32.GetForegroundWindow().pointer
+			paused = hwd != user32.GetForegroundWindow()
 			if (paused) return@every
 		}
 
