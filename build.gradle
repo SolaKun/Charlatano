@@ -19,7 +19,7 @@
 import java.nio.file.Files
 
 buildscript {
-	ext.kotlinVersion = '1.2.0'
+	ext.kotlinVersion = '1.2.10'
 	ext.gdxVersion = '1.9.7'
 
 	repositories {
