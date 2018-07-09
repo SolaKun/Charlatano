@@ -52,7 +52,7 @@ fun Player.weapon(): Weapons {
 
 	var id = 42
 	if (base > 0)
-		id = csgoEXE.uint(base + iWeaponID).toInt()
+		id = csgoEXE.byte(base + iWeaponID ).toInt()
 
 	return Weapons[id]
 }
@@ -77,20 +77,22 @@ internal fun Player.punch(): Angle = readCached(player2Punch) {
 	z = 0.0
 }
 
-internal fun Player.viewOffset(): Angle
-	= Vector(csgoEXE.float(this + vecViewOffset).toDouble(),
+internal fun Player.viewOffset(): Angle = Vector(
+	csgoEXE.float(this + vecViewOffset).toDouble(),
 	csgoEXE.float(this + vecViewOffset + 4).toDouble(),
-	csgoEXE.float(this + vecViewOffset + 8).toDouble())
+	csgoEXE.float(this + vecViewOffset + 8).toDouble()
+)
 
-internal fun Player.velocity(): Angle
-	= Vector(csgoEXE.float(this + vecVelocity).toDouble(),
+internal fun Player.velocity(): Angle = Vector(
+	csgoEXE.float(this + vecVelocity).toDouble(),
 	csgoEXE.float(this + vecVelocity + 4).toDouble(),
-	csgoEXE.float(this + vecVelocity + 8).toDouble())
+	csgoEXE.float(this + vecVelocity + 8).toDouble()
+)
 
 internal fun Player.boneMatrix() = csgoEXE.uint(this + dwBoneMatrix)
 
-internal fun Player.bone(offset: Int, boneID: Int = HEAD_BONE, boneMatrix: Long = boneMatrix())
-	= csgoEXE.float(boneMatrix + ((0x30 * boneID) + offset)).toDouble()
+internal fun Player.bone(offset: Int, boneID: Int = HEAD_BONE, boneMatrix: Long = boneMatrix()) =
+	csgoEXE.float(boneMatrix + ((0x30 * boneID) + offset)).toDouble()
 
 internal fun Player.isScoped(): Boolean = csgoEXE.boolean(this + bIsScoped)
 
