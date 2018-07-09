@@ -46,4 +46,4 @@ RCS_SMOOTHING = 63
 /**
  * The duration in milliseconds at which recoil control is checked.
  */
-RCS_DURATION = 1
+RCS_DURATION = 32
