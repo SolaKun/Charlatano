@@ -67,7 +67,7 @@ object CharlatanoOverlay : ApplicationAdapter() {
 			batch.projectionMatrix = camera.combined
 			shapeRenderer.projectionMatrix = camera.combined
 
-			for (i in 0..bodies.size - 1) bodies[i]()
+			bodies.forEach { it(this@CharlatanoOverlay) }
 
 			glDisable(GL20.GL_BLEND)
 		}
