@@ -74,6 +74,7 @@ fun main(args: Array<String>) {
 			"reset" -> resetToggles()
 			"toggles", "t" -> printToggles()
 			"cls", "clear", "c" -> clearScreen()
+			"ranks" -> getRanks()
 		}
 	}
 }
