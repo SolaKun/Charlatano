@@ -21,7 +21,6 @@ package com.charlatano.scripts.aim
 import com.charlatano.game.*
 import com.charlatano.game.entity.*
 import com.charlatano.game.entity.EntityType.Companion.ccsPlayer
-import com.charlatano.game.offsets.ScaleFormOffsets
 import com.charlatano.scripts.click
 import com.charlatano.settings.*
 import com.charlatano.utils.*
@@ -107,7 +106,7 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 	val pressed = aim or forceAim or ENABLE_RAGE
 	var currentTarget = target.get()
 
-	if (!pressed || CSGO.scaleFormDLL.boolean(ScaleFormOffsets.bCursorEnabled)) {
+	if (!pressed) {
 		reset()
 		return@every
 	}

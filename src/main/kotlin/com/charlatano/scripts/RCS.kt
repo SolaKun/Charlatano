@@ -20,7 +20,6 @@ package com.charlatano.scripts
 
 import com.charlatano.game.CSGO.clientDLL
 import com.charlatano.game.CSGO.csgoEXE
-import com.charlatano.game.CSGO.scaleFormDLL
 import com.charlatano.game.angle
 import com.charlatano.game.clientState
 import com.charlatano.game.entity.Player
@@ -29,7 +28,6 @@ import com.charlatano.game.me
 import com.charlatano.game.netvars.NetVarOffsets.iShotsFired
 import com.charlatano.game.netvars.NetVarOffsets.vecPunch
 import com.charlatano.game.offsets.ClientOffsets.dwLocalPlayer
-import com.charlatano.game.offsets.ScaleFormOffsets.bCursorEnabled
 import com.charlatano.game.setAngle
 import com.charlatano.scripts.aim.bone
 import com.charlatano.scripts.aim.perfect
@@ -48,7 +46,7 @@ fun rcs() = every(RCS_DURATION) {
 	if (myAddress <= 0) return@every
 
 	val shotsFired = csgoEXE.int(myAddress + iShotsFired)
-	if (shotsFired <= 2 || shotsFired < prevFired || scaleFormDLL.boolean(bCursorEnabled)) {
+	if (shotsFired <= 2 || shotsFired < prevFired) {
 		if (keyReleased(1)) { // prevent aim flick down cheaphax
 			reset()
 			return@every

@@ -19,15 +19,13 @@
 package com.charlatano.game.hooks
 
 import com.charlatano.game.CSGO.clientDLL
-import com.charlatano.game.CSGO.scaleFormDLL
 import com.charlatano.game.entity.dead
 import com.charlatano.game.entity.onGround
 import com.charlatano.game.offsets.ClientOffsets.dwLocalPlayer
-import com.charlatano.game.offsets.ScaleFormOffsets
 import com.charlatano.utils.extensions.uint
 import com.charlatano.utils.hook
 
 val onGround = hook(4) {
 	val me = clientDLL.uint(dwLocalPlayer)
-	me > 0 && !me.dead() && me.onGround() && !scaleFormDLL.boolean(ScaleFormOffsets.bCursorEnabled)
+	me > 0 && !me.dead() && me.onGround()
 }
