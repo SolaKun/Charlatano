@@ -27,7 +27,7 @@ object Dojo {
 
 	fun script(script: String): Any? = engine.eval(script)
 
-	operator inline fun <reified T> invoke(function: String) = engine.eval("$function()") as T
+	inline operator fun <reified T> invoke(function: String) = engine.eval("$function()") as T
 
 	operator fun invoke(function: String): Unit = invoke<Unit>(function)
 
