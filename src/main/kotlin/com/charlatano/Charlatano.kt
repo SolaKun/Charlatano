@@ -106,23 +106,24 @@ private fun resetToggles() {
 }
 
 private fun printToggles() {
-	System.out.println("AIM      = " + ENABLE_AIM)
-	System.out.println("BunnyHop = " + ENABLE_BUNNY_HOP)
-	System.out.println("ESP      = " + ENABLE_ESP)
-	System.out.println("Rage     = " + ENABLE_RAGE)
-	System.out.println("RCS      = " + ENABLE_RCS)
-	System.out.println("Trigger  = " + ENABLE_BONE_TRIGGER)
+	System.out.println("AIM      = $ENABLE_AIM")
+	System.out.println("BunnyHop = $ENABLE_BUNNY_HOP")
+	System.out.println("ESP      = $ENABLE_ESP")
+	System.out.println("Rage     = $ENABLE_RAGE")
+	System.out.println("RCS      = $ENABLE_RCS")
+	System.out.println("Trigger  = $ENABLE_BONE_TRIGGER")
 }
 
 private fun clearScreen() {
-	System.out.println("  =============+========+=========================")
-	System.out.println(" | Command     | Alias  | Function                |");
-	System.out.println("  =============+========+=========================")
+	System.out.println("  =============+========+========================= ")
+	System.out.println(" | Command     | Alias  | Function                |")
+	System.out.println("  =============+========+========================= ")
 	System.out.println(" | clear       | cls, c | Clears console screen   |")
 	System.out.println(" | exit / quit | e, q   | Stops Charlatano        |")
 	System.out.println(" | reload      | r      | Reloads /settings       |")
 	System.out.println(" | reset       |        | Disables all toggles    |")
 	System.out.println(" | toggles     | t      | Show what is toggled    |")
-	System.out.println("  =============+========+=========================")
+	System.out.println(" | rank        |        | Show ranks              |")
+	System.out.println("  =============+========+========================= ")
 	System.out.println()
 }
