@@ -123,7 +123,7 @@ private fun clearScreen() {
 	System.out.println(" | reload      | r      | Reloads /settings       |")
 	System.out.println(" | reset       |        | Disables all toggles    |")
 	System.out.println(" | toggles     | t      | Show what is toggled    |")
-	System.out.println(" | rank        |        | Show ranks              |")
+	System.out.println(" | ranks       |        | Show ranks              |")
 	System.out.println("  =============+========+========================= ")
 	System.out.println()
 }
