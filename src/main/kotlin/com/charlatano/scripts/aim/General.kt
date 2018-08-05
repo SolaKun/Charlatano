@@ -44,16 +44,16 @@ internal fun findTarget(position: Angle, angle: Angle, allowPerfect: Boolean,
 	var closestDelta = Double.MAX_VALUE
 	var closestPlayer = -1L
 	var FOV = lockFOV
-	if (keyPressed(FORCE_AIM_KEY) && FOV != BONE_TRIGGER_FOV)
-		FOV = FORCE_AIM_FOV
+
+	if (keyPressed(FORCE_AIM_KEY) && FOV != BONE_TRIGGER_FOV) FOV = FORCE_AIM_FOV
+	if (ENABLE_RAGE && keyPressed(FORCE_AIM_KEY)) FOV = 360
 
 	var closestFOV = Double.MAX_VALUE
 
 	forEntities(ccsPlayer) {
 		val entity = it.entity
 		if (entity <= 0) return@forEntities
-		if (ENABLE_RAGE && keyPressed(FORCE_AIM_KEY) && entity.canShootWall()) FOV = 360
-		else if (!entity.canShoot()) return@forEntities
+		if (!entity.canShoot()) return@forEntities
 
 		val ePos: Angle = entity.bones(boneID)
 		val distance = position.distanceTo(ePos)
@@ -130,7 +130,7 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 		target.set(currentTarget)
 	}
 
-	if (!currentTarget.canShootWall()) {
+	if (!currentTarget.canShoot()) {
 		reset()
 		if (!ENABLE_RAGE) {
 			Thread.sleep(AIM_TARGET_CHANGE_DELAY)
