@@ -130,9 +130,11 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 		target.set(currentTarget)
 	}
 
-	if (!currentTarget.canShoot()) {
+	if (!currentTarget.canShootWall()) {
 		reset()
-		Thread.sleep(16 + randLong(16))
+		if (!ENABLE_RAGE) {
+			Thread.sleep(AIM_TARGET_CHANGE_DELAY)
+		}
 	} else if (ENABLE_AIM) {
 		val weapon = me.weapon()
 		val boneID = bone.get()

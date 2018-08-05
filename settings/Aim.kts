@@ -100,6 +100,10 @@ AIM_ASSIST_MODE = false
  */
 AIM_ASSIST_STRICTNESS = 40
 
+/**
+ * How many milliseconds aimbot will wait after current target die to change the target.
+ */
+AIM_TARGET_CHANGE_DELAY = 250
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
