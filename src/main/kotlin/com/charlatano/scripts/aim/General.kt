@@ -43,10 +43,10 @@ internal fun findTarget(position: Angle, angle: Angle, allowPerfect: Boolean,
 						lockFOV: Int = AIM_FOV, boneID: Int = HEAD_BONE): Player {
 	var closestDelta = Double.MAX_VALUE
 	var closestPlayer = -1L
-	var FOV = lockFOV
+	var fov = lockFOV
 
-	if (keyPressed(FORCE_AIM_KEY) && FOV != BONE_TRIGGER_FOV) FOV = FORCE_AIM_FOV
-	if (ENABLE_RAGE && keyPressed(FORCE_AIM_KEY)) FOV = 360
+	if (keyPressed(FORCE_AIM_KEY) && fov != BONE_TRIGGER_FOV) fov = FORCE_AIM_FOV
+	if (ENABLE_RAGE) fov = 360
 
 	var closestFOV = Double.MAX_VALUE
 
@@ -65,7 +65,7 @@ internal fun findTarget(position: Angle, angle: Angle, allowPerfect: Boolean,
 		val delta = Math.abs(Math.sin(Math.toRadians(yawDiff)) * distance)
 		val fovDelta = Math.abs((Math.sin(Math.toRadians(pitchDiff)) + Math.sin(Math.toRadians(yawDiff))) * distance)
 
-		if (fovDelta <= FOV || ENABLE_RAGE) {
+		if (fovDelta <= fov || ENABLE_RAGE) {
 			if (delta < closestDelta) {
 				closestDelta = delta
 				closestPlayer = entity
