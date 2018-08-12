@@ -39,13 +39,16 @@ fun getRanks() {
 	rankIndex = 1
 	System.out.println("=============WARNING=============")
 	System.out.println("It's only working on Matchmaking")
-	System.out.println("If name's are glitchy turn back game and wait another round")
+	System.out.println("If name's are glitchy turn back game and wait another round or spam few times XD")
 	forEntities(ccsPlayer) {
 		rankIndex++
 
-		val playerName = csgoEXE.read(nameBase + (0x168 * rankIndex) + 0x14, 32,true)!!.getString(0)
+		val playerName = (0..31).joinToString(separator = "") { i ->
+			csgoEXE.read(nameBase + (0x168 * rankIndex) + 0x14 + i * 2, 2, false)!!.getString(0)
+		}
 
-		val rank = rankList[csgoEXE.int((playerResource + iCompetitiveRanking) + (rankIndex * 4))] // selecting rank with rank number
+		val rank =
+			rankList[csgoEXE.int((playerResource + iCompetitiveRanking) + (rankIndex * 4))] // selecting rank with rank number
 		System.out.println("$playerName rank is : $rank")
 	}
 }
