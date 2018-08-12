@@ -53,7 +53,8 @@ internal fun findTarget(position: Angle, angle: Angle, allowPerfect: Boolean,
 	forEntities(ccsPlayer) {
 		val entity = it.entity
 		if (entity <= 0) return@forEntities
-		if (!entity.canShoot()) return@forEntities
+		if (!entity.canShootWall()) return@forEntities
+		if (!ENABLE_RAGE && !entity.canShoot()) return@forEntities
 
 		val ePos: Angle = entity.bones(boneID)
 		val distance = position.distanceTo(ePos)
@@ -130,13 +131,15 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 		target.set(currentTarget)
 	}
 
-	if (!currentTarget.canShoot()) {
-		reset()
-		if (!ENABLE_RAGE) {
-			Thread.sleep(AIM_TARGET_CHANGE_DELAY)
+	if (ENABLE_AIM) {
+		if (!currentTarget.canShootWall()){
+			if (!ENABLE_RAGE) {
+				Thread.sleep(AIM_TARGET_CHANGE_DELAY)
+			}
+			reset()
+			return@every
 		}
-	} else if (ENABLE_AIM) {
-		val weapon = me.weapon()
+
 		val boneID = bone.get()
 		val bonePosition = currentTarget.bones(boneID)
 
@@ -144,16 +147,12 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 		if (AIM_ASSIST_MODE) destinationAngle.finalize(currentAngle, AIM_ASSIST_STRICTNESS / 100.0)
 
 		val aimSpeed = AIM_SPEED_MIN + randInt(AIM_SPEED_MAX - AIM_SPEED_MIN)
-		if (!ENABLE_RAGE)
+
+		if (!ENABLE_RAGE && currentTarget.canShoot()) {
 			doAim(destinationAngle, currentAngle, aimSpeed)
-		else {
-			if (weapon.sniper && !me.isScoped())
-				return@every
+		} else {
 			doAim(destinationAngle, currentAngle, 1)
-			if (currentTarget.canShoot())
-				click()
-			else
-				reset()
+			if (currentTarget.canShoot()) click() else reset()
 		}
 	}
 }
