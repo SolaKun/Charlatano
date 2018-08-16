@@ -37,6 +37,7 @@ enum class Weapons(val id: Int, val automatic: Boolean = false, val grenade: Boo
 	M4A4(16, automatic = true),
 	MAC10(17, automatic = true),
 	P90(19, automatic = true),
+	MP5_SD(23, automatic = true),
 	UMP45(24, automatic = true),
 	XM1014(25, shotgun = true),
 	PP_BIZON(26, automatic = true),
