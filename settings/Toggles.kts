@@ -26,15 +26,15 @@ import java.awt.event.KeyEvent
  */
 
 // Aim toggle key.
-TOGGLE_KEY_AIM = KeyEvent.VK_NUMPAD1
+TOGGLE_KEY_AIM = KeyEvent.VK_B
 HOLD_TOGGLE_AIM = false
 
 // RCS toggle key
-TOGGLE_KEY_RCS = KeyEvent.VK_NUMPAD2
+TOGGLE_KEY_RCS = KeyEvent.VK_R
 HOLD_TOGGLE_RCS = false
 
 // ESP toggle key
-TOGGLE_KEY_ESP = KeyEvent.VK_NUMPAD0
+TOGGLE_KEY_ESP = KeyEvent.VK_E
 HOLD_TOGGLE_ESP = false
 
 // Bunnyhop toggle key.
@@ -46,5 +46,5 @@ TOGGLE_KEY_BONETRIGGER = KeyEvent.VK_NUMPAD4
 HOLD_TOGGLE_BONETRIGGER = false
 
 // Rage toggle key.
-TOGGLE_KEY_RAGE = KeyEvent.VK_NUMPAD9
+TOGGLE_KEY_RAGE = KeyEvent.VK_P
 HOLD_TOGGLE_RAGE = false
