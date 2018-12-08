@@ -39,8 +39,10 @@ internal fun reset() {
 	perfect.set(false)
 }
 
-internal fun findTarget(position: Angle, angle: Angle, allowPerfect: Boolean,
-						lockFOV: Int = AIM_FOV, boneID: Int = HEAD_BONE): Player {
+internal fun findTarget(
+	position: Angle, angle: Angle, allowPerfect: Boolean,
+	lockFOV: Int = AIM_FOV, boneID: Int = HEAD_BONE
+): Player {
 	var closestDelta = Double.MAX_VALUE
 	var closestPlayer = -1L
 	var fov = lockFOV
@@ -83,23 +85,26 @@ internal fun findTarget(position: Angle, angle: Angle, allowPerfect: Boolean,
 	return closestPlayer
 }
 
-internal fun Entity.canShoot()
-	= spotted()
-	&& !dormant()
-	&& !dead()
-	&& me.team() != team()
-	&& !me.dead()
+internal fun Entity.canShoot() =
+	spotted()
+		&& !dormant()
+		&& !dead()
+		&& (me.team() != team() || TEAMMATES_ARE_ENEMIES)
+		&& !me.dead()
 
-internal fun Entity.canShootWall()
-	= !dormant()
-	&& !dead()
-	&& me.team() != team()
-	&& !me.dead()
+internal fun Entity.canShootWall() =
+	!dormant()
+		&& !dead()
+		&& (me.team() != team() || TEAMMATES_ARE_ENEMIES)
+		&& !me.dead()
 
-internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boolean,
-								  crossinline doAim: (destinationAngle: Angle,
-													  currentAngle: Angle, aimSpeed: Int) -> R)
-	= every(duration) {
+internal inline fun <R> aimScript(
+	duration: Int, crossinline precheck: () -> Boolean,
+	crossinline doAim: (
+		destinationAngle: Angle,
+		currentAngle: Angle, aimSpeed: Int
+	) -> R
+) = every(duration) {
 	if (!precheck()) return@every
 
 	val aim = ACTIVATE_FROM_FIRE_KEY && keyPressed(FIRE_KEY)
@@ -132,7 +137,7 @@ internal inline fun <R> aimScript(duration: Int, crossinline precheck: () -> Boo
 	}
 
 	if (ENABLE_AIM) {
-		if (!currentTarget.canShootWall()){
+		if (!currentTarget.canShootWall()) {
 			if (!ENABLE_RAGE) {
 				Thread.sleep(AIM_TARGET_CHANGE_DELAY)
 			}

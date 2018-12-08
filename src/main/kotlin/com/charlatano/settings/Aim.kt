@@ -108,6 +108,11 @@ var AIM_ASSIST_STRICTNESS = 40
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
+ * This will allow you to shoot teammates with aimbot when turned on.
+ */
+var TEAMMATES_ARE_ENEMIES = false
+
+/**
  * The duration in milliseconds at which aimbot paths are recalculated.
  */
 var AIM_DURATION = 1

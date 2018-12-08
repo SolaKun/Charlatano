@@ -111,6 +111,11 @@ AIM_TARGET_CHANGE_DELAY = 250
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
+ * This will allow you to shoot teammates with aimbot when turned on.
+ */
+TEAMMATES_ARE_ENEMIES = true
+
+/**
  * The duration in milliseconds at which aimbot paths are recalculated.
  */
 AIM_DURATION = 1
