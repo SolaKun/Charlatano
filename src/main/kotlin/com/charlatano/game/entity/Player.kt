@@ -50,7 +50,7 @@ fun Player.weapon(): Weapons {
 	val index = address and 0xFFF
 	val base = clientDLL.uint(dwEntityList + (index - 1) * ENTITY_SIZE)
 
-	var id = 2
+	var id = 42
 	if (base > 0)
 		id = csgoEXE.byte(base + iItemDefinitionIndex).toInt()
 
