@@ -27,7 +27,7 @@ import com.charlatano.game.netvars.NetVarOffsets.dwBoneMatrix
 import com.charlatano.game.netvars.NetVarOffsets.fFlags
 import com.charlatano.game.netvars.NetVarOffsets.hActiveWeapon
 import com.charlatano.game.netvars.NetVarOffsets.iHealth
-import com.charlatano.game.netvars.NetVarOffsets.iWeaponID
+import com.charlatano.game.netvars.NetVarOffsets.iItemDefinitionIndex
 import com.charlatano.game.netvars.NetVarOffsets.lifeState
 import com.charlatano.game.netvars.NetVarOffsets.nTickBase
 import com.charlatano.game.netvars.NetVarOffsets.vecPunch
@@ -50,9 +50,9 @@ fun Player.weapon(): Weapons {
 	val index = address and 0xFFF
 	val base = clientDLL.uint(dwEntityList + (index - 1) * ENTITY_SIZE)
 
-	var id = 42
+	var id = 2
 	if (base > 0)
-		id = csgoEXE.byte(base + iWeaponID ).toInt()
+		id = csgoEXE.byte(base + iItemDefinitionIndex ).toInt()
 
 	return Weapons[id]
 }

@@ -18,9 +18,11 @@
 
 package com.charlatano.game
 
-enum class Weapons(val id: Int, val automatic: Boolean = false, val grenade: Boolean = false,
-				   val knife: Boolean = false, val sniper: Boolean = false, val boltAction: Boolean = false,
-				   val pistol: Boolean = false, val shotgun: Boolean = false) {
+enum class Weapons(
+	val id: Int, val automatic: Boolean = false, val grenade: Boolean = false,
+	val knife: Boolean = false, val sniper: Boolean = false, val boltAction: Boolean = false,
+	val pistol: Boolean = false, val shotgun: Boolean = false
+) {
 
 	NONE(0),
 	DESERT_EAGLE(1, pistol = true),
@@ -62,11 +64,24 @@ enum class Weapons(val id: Int, val automatic: Boolean = false, val grenade: Boo
 	DECOY_GRENADE(47, grenade = true),
 	INCENDIARY_GRENADE(48, grenade = true),
 	C4(49),
+	MEDISHOT(57, knife = true),
 	KNIFE_T(59, knife = true),
 	M4A1_SILENCER(60, automatic = true),
 	USP_SILENCER(61, pistol = true),
 	CZ75A(63, automatic = true, pistol = true),
 	R8_REVOLVER(64, boltAction = true, pistol = true),
+	TAGRENADE(68, grenade = true),
+	FISTS(69, knife = true),
+	BREACHCHARGE(70, knife = true),
+	TABLET(72, knife = true),
+	MELEE(74, knife = true),
+	AXE(75, knife = true),
+	HAMMER(76, knife = true),
+	SPANNER(78, knife = true),
+	KNIFE_GHOST(80, knife = true),
+	FIRE_BOMB(81, knife = true),
+	DIVERSION_DEVICE(82, knife = true),
+	FRAG_GRENADE(83, grenade = true),
 	KNIFE_BAYONET(500, knife = true),
 	KNIFE_FLIP(505, knife = true),
 	KNIFE_GUT(506, knife = true),
@@ -77,13 +92,11 @@ enum class Weapons(val id: Int, val automatic: Boolean = false, val grenade: Boo
 	KNIFE_BOWIE(514, knife = true),
 	KNIFE_BUTTERFLY(515, knife = true),
 	KNIFE_PUSH(516, knife = true),
-	FISTS(69, knife = true),
-	MEDISHOT(57, knife = true),
-	TABLET(72, knife = true),
-	DIVERSION_DEVICE(82, knife = true),
-	FIRE_BOMB(81, knife = true),
-	CHARGE(70, knife = true),
-	HAMMER(76, knife = true);
+	KNIFE_URSUS(519, knife = true),
+	KNIFE_GYPSY_JACKKNIFE(520, knife = true),
+	KNIFE_STILETTO(522, knife = true),
+	KNIFE_WIDOWMAKER(523, knife = true),
+	;
 
 	companion object {
 
