@@ -24,7 +24,8 @@ import org.jire.arrowhead.keyPressed
 
 fun Toggles_AIM() = every(10) {
 	if ((keyPressed(0x12) && keyPressed(TOGGLE_KEY_AIM))
-		|| (HOLD_TOGGLE_AIM && keyPressed(TOGGLE_KEY_AIM))) {
+		|| (HOLD_TOGGLE_AIM && keyPressed(TOGGLE_KEY_AIM))
+	) {
 		ENABLE_AIM = !ENABLE_AIM
 
 		do {
@@ -38,7 +39,8 @@ fun Toggles_AIM() = every(10) {
 
 fun Toggles_BUNNYHOP() = every(10) {
 	if ((keyPressed(0x12) && keyPressed(TOGGLE_KEY_BUNNYHOP))
-		|| (HOLD_TOGGLE_BUNNYHOP && keyPressed(TOGGLE_KEY_BUNNYHOP))) {
+		|| (HOLD_TOGGLE_BUNNYHOP && keyPressed(TOGGLE_KEY_BUNNYHOP))
+	) {
 		ENABLE_BUNNY_HOP = !ENABLE_BUNNY_HOP
 
 		do {
@@ -52,7 +54,8 @@ fun Toggles_BUNNYHOP() = every(10) {
 
 fun Toggles_ESP() = every(10) {
 	if ((keyPressed(0x12) && keyPressed(TOGGLE_KEY_ESP))
-		|| (HOLD_TOGGLE_ESP && keyPressed(TOGGLE_KEY_ESP))) {
+		|| (HOLD_TOGGLE_ESP && keyPressed(TOGGLE_KEY_ESP))
+	) {
 		ENABLE_ESP = !ENABLE_ESP
 
 		do {
@@ -66,7 +69,8 @@ fun Toggles_ESP() = every(10) {
 
 fun Toggles_RAGE() = every(10) {
 	if ((keyPressed(0x12) && keyPressed(TOGGLE_KEY_RAGE))
-		|| (HOLD_TOGGLE_RAGE && keyPressed(TOGGLE_KEY_RAGE))) {
+		|| (HOLD_TOGGLE_RAGE && keyPressed(TOGGLE_KEY_RAGE))
+	) {
 		ENABLE_RAGE = !ENABLE_RAGE
 
 		do {
@@ -80,7 +84,8 @@ fun Toggles_RAGE() = every(10) {
 
 fun Toggles_RCS() = every(10) {
 	if ((keyPressed(0x12) && keyPressed(TOGGLE_KEY_RCS))
-		|| (HOLD_TOGGLE_RCS && keyPressed(TOGGLE_KEY_RCS))) {
+		|| (HOLD_TOGGLE_RCS && keyPressed(TOGGLE_KEY_RCS))
+	) {
 		ENABLE_RCS = !ENABLE_RCS
 
 		do {
@@ -94,7 +99,8 @@ fun Toggles_RCS() = every(10) {
 
 fun Toggles_BONETRIGGER() = every(10) {
 	if ((keyPressed(0x12) && keyPressed(TOGGLE_KEY_BONETRIGGER))
-		|| (HOLD_TOGGLE_BONETRIGGER && keyPressed(TOGGLE_KEY_BONETRIGGER))) {
+		|| (HOLD_TOGGLE_BONETRIGGER && keyPressed(TOGGLE_KEY_BONETRIGGER))
+	) {
 		ENABLE_BONE_TRIGGER = !ENABLE_BONE_TRIGGER
 
 		do {

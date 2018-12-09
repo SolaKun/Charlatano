@@ -36,7 +36,10 @@ import java.util.*
 const val SETTINGS_DIRECTORY = "settings"
 
 fun main(args: Array<String>) {
-	System.setProperty("kotlin.compiler.jar", K2JVMCompiler::class.java.protectionDomain.codeSource.location.toURI().path)
+	System.setProperty(
+		"kotlin.compiler.jar",
+		K2JVMCompiler::class.java.protectionDomain.codeSource.location.toURI().path
+	)
 	System.setProperty("idea.io.use.nio2", "true")
 
 	loadSettings()
@@ -82,9 +85,11 @@ fun main(args: Array<String>) {
 private fun loadSettings() {
 	File(SETTINGS_DIRECTORY).listFiles().forEach {
 		FileReader(it).use {
-			Dojo.script(it
-				.readLines()
-				.joinToString("\n"))
+			Dojo.script(
+				it
+					.readLines()
+					.joinToString("\n")
+			)
 		}
 	}
 

@@ -70,7 +70,6 @@ object Overlay {
 		// sets up window to be fullscreen, click-through, etc.
 		WindowCorrector.setupWindow(hwnd)
 
-
 		// sets up the full transparency of the Window (only Windows 7 and 10 can do this)
 		val transparencyApplier: TransparencyApplier =
 			if (System.getProperty("os.name").contains("windows 10", ignoreCase = true))

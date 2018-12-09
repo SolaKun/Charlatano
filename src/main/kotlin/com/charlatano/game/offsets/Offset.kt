@@ -27,8 +27,10 @@ import org.jire.arrowhead.Module
 import kotlin.LazyThreadSafetyMode.NONE
 import kotlin.reflect.KProperty
 
-class Offset(val module: Module, val patternOffset: Long, val addressOffset: Long,
-			 val read: Boolean, val subtract: Boolean, val mask: ByteArray) : Addressed {
+class Offset(
+	val module: Module, val patternOffset: Long, val addressOffset: Long,
+	val read: Boolean, val subtract: Boolean, val mask: ByteArray
+) : Addressed {
 
 	companion object {
 		val memoryByModule = Object2ObjectArrayMap<Module, Memory>()

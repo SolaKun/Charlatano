@@ -30,8 +30,10 @@ import org.jire.arrowhead.keyPressed
 import org.jire.arrowhead.keyReleased
 
 private val onBoneTriggerTarget = hook(1) {
-	if (ENABLE_BONE_TRIGGER) findTarget(me.position(), clientState.angle(), false,
-		BONE_TRIGGER_FOV, bone.get()) >= 0
+	if (ENABLE_BONE_TRIGGER) findTarget(
+		me.position(), clientState.angle(), false,
+		BONE_TRIGGER_FOV, bone.get()
+	) >= 0
 	else false
 }
 
@@ -48,4 +50,4 @@ fun click() {
 		Thread.sleep(DELAY_BETWEEN_SHOTS + randLong(4))
 	else
 		Thread.sleep(4 + randLong(4))
-} 
+}

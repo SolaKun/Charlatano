@@ -65,8 +65,10 @@ object CSGO {
 
 	fun initialize() {
 		retry(128) {
-			csgoEXE = processByName("csgo.exe", WinNT.PROCESS_QUERY_INFORMATION
-				or WinNT.PROCESS_VM_READ or WinNT.PROCESS_VM_WRITE)!!
+			csgoEXE = processByName(
+				"csgo.exe", WinNT.PROCESS_QUERY_INFORMATION
+					or WinNT.PROCESS_VM_READ or WinNT.PROCESS_VM_WRITE
+			)!!
 		}
 
 		retry(128) {
@@ -77,8 +79,10 @@ object CSGO {
 
 		val rect = WinDef.RECT()
 		val user32 = User32.INSTANCE
-		val hwd = user32.FindWindow("Valve001", "Counter-Strike: "
-			+ (if (CLASSIC_OFFENSIVE) "Classic" else "Global") + " Offensive")
+		val hwd = user32.FindWindow(
+			"Valve001", "Counter-Strike: "
+				+ (if (CLASSIC_OFFENSIVE) "Classic" else "Global") + " Offensive"
+		)
 
 		var lastWidth = 0
 		var lastHeight = 0

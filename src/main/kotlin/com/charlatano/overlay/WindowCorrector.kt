@@ -48,10 +48,12 @@ object WindowCorrector {
 		SetWindowLong(hwnd, WinUser.GWL_EXSTYLE, wl)
 
 		val HWND_TOPPOS = WinDef.HWND(Pointer(-1))
-		SetWindowPos(hwnd, HWND_TOPPOS,
+		SetWindowPos(
+			hwnd, HWND_TOPPOS,
 			CSGO.gameX, CSGO.gameY,
 			CSGO.gameWidth, CSGO.gameHeight,
-			SWP_NOMOVE or SWP_NOSIZE)
+			SWP_NOMOVE or SWP_NOSIZE
+		)
 	}
 
 }

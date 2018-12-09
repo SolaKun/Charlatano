@@ -37,7 +37,8 @@ fun ClientState.angle(): Angle = readCached(clientState2Angle) {
 
 fun ClientState.setAngle(angle: Angle) {
 	if (angle.z != 0.0 || angle.x < -89 || angle.x > 180 || angle.y < -180 || angle.y > 180
-		|| angle.x.isNaN() || angle.y.isNaN() || angle.z.isNaN()) return
+		|| angle.x.isNaN() || angle.y.isNaN() || angle.z.isNaN()
+	) return
 
 	csgoEXE[this + dwViewAngles] = angle.x.toFloat() // pitch (up and down)
 	csgoEXE[this + dwViewAngles + 4] = angle.y.toFloat() // yaw (side to side)

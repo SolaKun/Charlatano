@@ -32,11 +32,15 @@ import com.charlatano.game.setAngle
 import com.charlatano.scripts.aim.bone
 import com.charlatano.scripts.aim.perfect
 import com.charlatano.settings.*
-import com.charlatano.utils.*
+import com.charlatano.utils.Vector
+import com.charlatano.utils.every
 import com.charlatano.utils.extensions.uint
+import com.charlatano.utils.normalize
+import com.charlatano.utils.randDouble
 import org.jire.arrowhead.keyReleased
 
-@Volatile private var prevFired = 0
+@Volatile
+private var prevFired = 0
 private val lastPunch = DoubleArray(2)
 
 fun rcs() = every(RCS_DURATION) {
@@ -61,8 +65,10 @@ fun rcs() = every(RCS_DURATION) {
 		}
 	}
 
-	val punch = Vector(csgoEXE.float(myAddress + vecPunch).toDouble(),
-			csgoEXE.float(myAddress + vecPunch + 4).toDouble(), 0.0)
+	val punch = Vector(
+		csgoEXE.float(myAddress + vecPunch).toDouble(),
+		csgoEXE.float(myAddress + vecPunch + 4).toDouble(), 0.0
+	)
 	if (punch.invalid()) return@every
 	punch.apply {
 		x *= if (RCS_MAX > RCS_MIN) randDouble(RCS_MIN, RCS_MAX) else RCS_MIN

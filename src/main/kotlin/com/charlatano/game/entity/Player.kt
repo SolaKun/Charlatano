@@ -52,7 +52,7 @@ fun Player.weapon(): Weapons {
 
 	var id = 2
 	if (base > 0)
-		id = csgoEXE.byte(base + iItemDefinitionIndex ).toInt()
+		id = csgoEXE.byte(base + iItemDefinitionIndex).toInt()
 
 	return Weapons[id]
 }

@@ -20,7 +20,6 @@ package com.charlatano.settings
 
 import java.awt.event.KeyEvent
 
-
 var TOGGLE_KEY_AIM = KeyEvent.VK_NUMPAD1
 var HOLD_TOGGLE_AIM = false
 var TOGGLE_KEY_RCS = KeyEvent.VK_NUMPAD2

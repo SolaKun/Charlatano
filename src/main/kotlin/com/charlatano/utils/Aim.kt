@@ -48,8 +48,8 @@ fun applyFlatSmoothing(currentAngle: Angle, destinationAngle: Angle, smoothing: 
 	normalize()
 }
 
-fun writeAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Double)
-	= clientState.setAngle(applyFlatSmoothing(currentAngle, destinationAngle, smoothing))
+fun writeAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Double) =
+	clientState.setAngle(applyFlatSmoothing(currentAngle, destinationAngle, smoothing))
 
 fun flatAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Double, sensMultiplier: Double = 1.0) {
 	applyFlatSmoothing(currentAngle, destinationAngle, smoothing)
@@ -67,9 +67,11 @@ fun flatAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Double, sen
 	mouseMove((dx / 2).toInt(), (dy / 2).toInt())
 }
 
-fun pathAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Int,
-			randomSleepMax: Int = 10, staticSleep: Int = 2,
-			sensMultiplier: Double = 1.0, perfect: Boolean = false) {
+fun pathAim(
+	currentAngle: Angle, destinationAngle: Angle, smoothing: Int,
+	randomSleepMax: Int = 10, staticSleep: Int = 2,
+	sensMultiplier: Double = 1.0, perfect: Boolean = false
+) {
 	if (!destinationAngle.isValid()) return
 
 	val delta = delta.get()
@@ -88,7 +90,8 @@ fun pathAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Int,
 	target.set((mousePos.x + (dx / 2)).toInt(), (mousePos.y + (dy / 2)).toInt())
 
 	if (target.x <= 0 || target.x >= gameX + gameWidth
-		|| target.y <= 0 || target.y >= gameY + gameHeight) return
+		|| target.y <= 0 || target.y >= gameY + gameHeight
+	) return
 
 	if (perfect) {
 		mouseMove((dx / 2).toInt(), (dy / 2).toInt())
@@ -105,9 +108,11 @@ fun pathAim(currentAngle: Angle, destinationAngle: Angle, smoothing: Int,
 		mouseMove(tx / halfIndex, ty / halfIndex)
 
 		val sleepingFactor = smoothing / 100.0
-		val sleepTime = Math.floor(staticSleep.toDouble()
-			+ randInt(randomSleepMax)
-			+ randInt(i)) * sleepingFactor
+		val sleepTime = Math.floor(
+			staticSleep.toDouble()
+				+ randInt(randomSleepMax)
+				+ randInt(i)
+		) * sleepingFactor
 		if (sleepTime > 0) Thread.sleep(sleepTime.toLong())
 	}
 }

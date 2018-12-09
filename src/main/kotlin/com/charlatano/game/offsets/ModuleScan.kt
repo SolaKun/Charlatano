@@ -22,9 +22,11 @@ import com.charlatano.utils.RepeatedInt
 import it.unimi.dsi.fastutil.bytes.ByteArrayList
 import org.jire.arrowhead.Module
 
-internal class ModuleScan(private val module: Module, private val patternOffset: Long,
-						  private val addressOffset: Long, private val read: Boolean,
-						  private val subtract: Boolean) {
+internal class ModuleScan(
+	private val module: Module, private val patternOffset: Long,
+	private val addressOffset: Long, private val read: Boolean,
+	private val subtract: Boolean
+) {
 
 	operator fun invoke(vararg mask: Any): Offset {
 		val bytes = ByteArrayList()

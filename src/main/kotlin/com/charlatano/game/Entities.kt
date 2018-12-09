@@ -45,8 +45,7 @@ private val cachedResults = Int2ObjectArrayMap<EntityContainer>(EntityType.size)
 val entitiesValues = arrayOfNulls<CacheableList<EntityContext>>(MAX_ENTITIES)
 var entitiesValuesCounter = 0
 
-val entities: Object2ObjectMap<EntityType, CacheableList<EntityContext>>
-	= EntityList(EntityType.size).apply {
+val entities: Object2ObjectMap<EntityType, CacheableList<EntityContext>> = EntityList(EntityType.size).apply {
 	for (type in EntityType.cachedValues) {
 		val cacheableList = CacheableList<EntityContext>(MAX_ENTITIES)
 		put(type, cacheableList)
@@ -56,8 +55,10 @@ val entities: Object2ObjectMap<EntityType, CacheableList<EntityContext>>
 
 fun entityByType(type: EntityType): EntityContext? = entities[type]?.firstOrNull()
 
-internal inline fun forEntities(types: Array<EntityType> = EntityType.cachedValues,
-								crossinline body: (EntityContext) -> Unit) {
+internal inline fun forEntities(
+	types: Array<EntityType> = EntityType.cachedValues,
+	crossinline body: (EntityContext) -> Unit
+) {
 	val hash = Arrays.hashCode(types)
 	val container = cachedResults.get(hash) ?: EntityContainer(EntityType.size)
 

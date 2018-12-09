@@ -38,5 +38,5 @@ class NetVar(val className: String, var varName: String?, val offset: Int, val i
 
 }
 
-fun netVar(className: String, varName: String? = null, offset: Int = 0, index: Int = -1)
-	= NetVar(className, if (varName != null && index >= 0) "$varName[$index]" else varName, offset, index)
+fun netVar(className: String, varName: String? = null, offset: Int = 0, index: Int = -1) =
+	NetVar(className, if (varName != null && index >= 0) "$varName[$index]" else varName, offset, index)

@@ -73,7 +73,7 @@ internal fun boxEsp() = CharlatanoOverlay {
 		}
 	}
 
-	shapeRenderer.apply sR@ {
+	shapeRenderer.apply sR@{
 		begin()
 		for (i in 0..currentIdx - 1) boxes[i].apply {
 			this@sR.color = color
@@ -85,6 +85,8 @@ internal fun boxEsp() = CharlatanoOverlay {
 	currentIdx = 0
 }
 
-private data class Box(var x: Int = -1, var y: Int = -1,
-					   var w: Int = -1, var h: Int = -1,
-					   var color: Color = Color.WHITE)
+private data class Box(
+	var x: Int = -1, var y: Int = -1,
+	var w: Int = -1, var h: Int = -1,
+	var color: Color = Color.WHITE
+)

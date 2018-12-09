@@ -60,8 +60,10 @@ fun bombTimer() {
 
 			batch.begin()
 			textRenderer.color = Color.ORANGE
-			textRenderer.draw(batch, "Location: $location," +
-				"${bomb.timeLeft()} seconds, can defuse? $canDefuse", 20F, 400F)
+			textRenderer.draw(
+				batch, "Location: $location," +
+					"${bomb.timeLeft()} seconds, can defuse? $canDefuse", 20F, 400F
+			)
 			batch.end()
 		}
 	}
