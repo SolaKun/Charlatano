@@ -22,6 +22,7 @@ object NetVarOffsets {
 
 	val dwModel = 0x6C
 	val iTeamNum by netVar("DT_BaseEntity")
+	val nSurvivalTeam by netVar("DT_BaseEntity")
 	val bSpotted by netVar("DT_BaseEntity")
 	val bSpottedByMask by netVar("DT_BaseEntity")
 	val vecOrigin by netVar("DT_BaseEntity")
@@ -42,10 +43,14 @@ object NetVarOffsets {
 	val iCrossHairID by netVar("DT_CSPlayer", "m_bHasDefuser", 0x5C)
 	val iShotsFired by netVar("DT_CSPlayer")
 	val bIsScoped by netVar("DT_CSPlayer")
+	val bHasDefuser by netVar("DT_CSPlayer", "m_bHasDefuser")
 
 	val flC4Blow by netVar("DT_PlantedC4")
 	val bBombDefused by netVar("DT_PlantedC4")
-	val hOwnerEntity by netVar("DT_PlantedC4")
+	val hBombDefuser by netVar("DT_PlantedC4")
+	val flDefuseCountDown by netVar("DT_PlantedC4")
+
+	val hOwnerEntity by netVar("DT_BaseEntity")
 
 	val dwBoneMatrix by netVar("DT_BaseAnimating", "m_nForceBone", 0x1C)
 

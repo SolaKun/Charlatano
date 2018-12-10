@@ -22,6 +22,8 @@ import com.charlatano.game.CSGO.ENTITY_SIZE
 import com.charlatano.game.CSGO.clientDLL
 import com.charlatano.game.CSGO.csgoEXE
 import com.charlatano.game.Weapons
+import com.charlatano.game.netvars.NetVarOffsets
+import com.charlatano.game.netvars.NetVarOffsets.bHasDefuser
 import com.charlatano.game.netvars.NetVarOffsets.bIsScoped
 import com.charlatano.game.netvars.NetVarOffsets.dwBoneMatrix
 import com.charlatano.game.netvars.NetVarOffsets.fFlags
@@ -63,8 +65,10 @@ internal fun Player.onGround() = flags() and 1 == 1
 
 internal fun Player.health(): Int = csgoEXE.int(this + iHealth)
 
+internal fun Player.lifeState(): Int = csgoEXE.byte(this + lifeState).toInt()
+
 internal fun Player.dead() = try {
-	(csgoEXE.byte(this + lifeState) != 0.toByte()) || health() <= 0
+	lifeState() != 0 || health() <= 0
 } catch (t: Throwable) {
 	false
 }
@@ -98,4 +102,9 @@ internal fun Player.bone(offset: Int, boneID: Int = HEAD_BONE, boneMatrix: Long 
 
 internal fun Player.isScoped(): Boolean = csgoEXE.boolean(this + bIsScoped)
 
+internal fun Player.hasDefuser(): Boolean = csgoEXE.boolean(this + bHasDefuser)
+
 internal fun Player.time(): Double = csgoEXE.int(this + nTickBase) * (1.0 / SERVER_TICK_RATE)
+
+internal fun Player.location(): String = csgoEXE.read(this + NetVarOffsets.szLastPlaceName, 32, true)?.getString(0)
+	?: ""

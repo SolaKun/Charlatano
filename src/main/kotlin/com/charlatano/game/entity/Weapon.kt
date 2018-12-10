@@ -23,7 +23,7 @@ import com.charlatano.game.Weapons
 import com.charlatano.game.me
 import com.charlatano.game.netvars.NetVarOffsets.flNextPrimaryAttack
 import com.charlatano.game.netvars.NetVarOffsets.iClip1
-import com.charlatano.game.netvars.NetVarOffsets.iWeaponID
+import com.charlatano.game.netvars.NetVarOffsets.iItemDefinitionIndex
 import com.charlatano.utils.extensions.uint
 
 typealias Weapon = Long
@@ -40,7 +40,7 @@ internal fun Weapon.canFire(): Boolean {
 internal fun Weapon.type(): Weapons {
 	var id = 42
 	if (this > 0)
-		id = csgoEXE.short(this + iWeaponID).toInt()
+		id = csgoEXE.short(this + iItemDefinitionIndex).toInt()
 
 	return Weapons[id]
 }

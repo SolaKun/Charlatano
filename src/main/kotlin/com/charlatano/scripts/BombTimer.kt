@@ -20,7 +20,7 @@ package com.charlatano.scripts
 
 import com.badlogic.gdx.graphics.Color
 import com.charlatano.game.entity.EntityType
-import com.charlatano.game.entity.location
+import com.charlatano.game.entity.plantLocation
 import com.charlatano.game.entity.timeLeft
 import com.charlatano.game.entityByType
 import com.charlatano.game.hooks.bombPlanted
@@ -45,7 +45,7 @@ fun bombTimer() {
 		val bomb = entityByType.entity
 		canDefuse = bomb.timeLeft() >= if (hasKit) 5 else 10
 
-		if (location.isEmpty()) location = bomb.location()
+		if (location.isEmpty()) location = bomb.plantLocation()
 	}
 
 	CharlatanoOverlay {

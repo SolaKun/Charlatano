@@ -21,9 +21,7 @@ package com.charlatano.scripts
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.charlatano.game.*
-import com.charlatano.game.entity.punch
-import com.charlatano.game.entity.shotsFired
-import com.charlatano.game.entity.weapon
+import com.charlatano.game.entity.*
 import com.charlatano.scripts.aim.bone
 import com.charlatano.settings.*
 import com.charlatano.utils.every
