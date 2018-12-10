@@ -118,7 +118,7 @@ object CSGO {
 		retry(16) {
 			var myAddress = clientDLL.uint(dwLocalPlayer)
 			if (myAddress <= 0) {
-				dwLocalPlayer = dwLocalPlayer + 0x1C // can't do dwLocalPlayer += 0x1C because of compiler bug...
+				dwLocalPlayer += 0x1C
 				myAddress = clientDLL.uint(dwLocalPlayer)
 			}
 
