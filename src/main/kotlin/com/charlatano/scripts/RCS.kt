@@ -20,8 +20,11 @@ package com.charlatano.scripts
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
-import com.charlatano.game.*
+import com.charlatano.game.angle
+import com.charlatano.game.clientState
 import com.charlatano.game.entity.*
+import com.charlatano.game.me
+import com.charlatano.game.setAngle
 import com.charlatano.scripts.aim.bone
 import com.charlatano.settings.*
 import com.charlatano.utils.every
@@ -36,7 +39,7 @@ fun rcs() = every(RCS_DURATION) {
 	if (me <= 0 || !ENABLE_RCS) return@every
 	val weaponEntity = me.weaponEntity()
 	val weapon = me.weapon(weaponEntity)
-	if (weapon.boltAction || weapon == Weapons.DESERT_EAGLE) return@every
+	if (!weapon.automatic) return@every
 	val shotsFired = me.shotsFired()
 	val forceSet = shotsFired == 0 && !lastPunch.isZero
 	if (forceSet || shotsFired > 0 || weaponEntity.bullets() < 1) {
