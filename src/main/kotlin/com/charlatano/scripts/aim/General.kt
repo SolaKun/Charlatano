@@ -34,130 +34,130 @@ val bone = AtomicInteger(HEAD_BONE)
 val perfect = AtomicBoolean() // only applicable for safe aim
 
 internal fun reset() {
-	target.set(-1L)
-	bone.set(HEAD_BONE)
-	perfect.set(false)
+    target.set(-1L)
+    bone.set(HEAD_BONE)
+    perfect.set(false)
 }
 
 internal fun findTarget(
-	position: Angle, angle: Angle, allowPerfect: Boolean,
-	lockFOV: Int = AIM_FOV, boneID: Int = HEAD_BONE
+    position: Angle, angle: Angle, allowPerfect: Boolean,
+    lockFOV: Int = AIM_FOV, boneID: Int = HEAD_BONE
 ): Player {
-	var closestDelta = Double.MAX_VALUE
-	var closestPlayer = -1L
-	var fov = lockFOV
+    var closestDelta = Double.MAX_VALUE
+    var closestPlayer = -1L
+    var fov = lockFOV
 
-	if (keyPressed(FORCE_AIM_KEY) && fov != BONE_TRIGGER_FOV) fov = FORCE_AIM_FOV
-	if (ENABLE_RAGE) fov = 360
+    if (keyPressed(FORCE_AIM_KEY) && fov != BONE_TRIGGER_FOV) fov = FORCE_AIM_FOV
+    if (ENABLE_RAGE) fov = 360
 
-	var closestFOV = Double.MAX_VALUE
+    var closestFOV = Double.MAX_VALUE
 
-	forEntities(ccsPlayer) {
-		val entity = it.entity
-		if (entity <= 0) return@forEntities
-		if (!entity.canShootWall()) return@forEntities
-		if (!ENABLE_RAGE && !entity.canShoot()) return@forEntities
+    forEntities(ccsPlayer) {
+        val entity = it.entity
+        if (entity <= 0) return@forEntities
+        if (!entity.canShootWall()) return@forEntities
+        if (!ENABLE_RAGE && !entity.canShoot()) return@forEntities
 
-		val ePos: Angle = entity.bones(boneID)
-		val distance = position.distanceTo(ePos)
+        val ePos: Angle = entity.bones(boneID)
+        val distance = position.distanceTo(ePos)
 
-		val dest = calculateAngle(me, ePos)
+        val dest = calculateAngle(me, ePos)
 
-		val pitchDiff = Math.abs(angle.x - dest.x)
-		val yawDiff = Math.abs(angle.y - dest.y)
-		val delta = Math.abs(Math.sin(Math.toRadians(yawDiff)) * distance)
-		val fovDelta = Math.abs((Math.sin(Math.toRadians(pitchDiff)) + Math.sin(Math.toRadians(yawDiff))) * distance)
+        val pitchDiff = Math.abs(angle.x - dest.x)
+        val yawDiff = Math.abs(angle.y - dest.y)
+        val delta = Math.abs(Math.sin(Math.toRadians(yawDiff)) * distance)
+        val fovDelta = Math.abs((Math.sin(Math.toRadians(pitchDiff)) + Math.sin(Math.toRadians(yawDiff))) * distance)
 
-		if (fovDelta <= fov || ENABLE_RAGE) {
-			if (delta < closestDelta) {
-				closestDelta = delta
-				closestPlayer = entity
-				closestFOV = fovDelta
-			}
-		}
-	}
+        if (fovDelta <= fov || ENABLE_RAGE) {
+            if (delta < closestDelta) {
+                closestDelta = delta
+                closestPlayer = entity
+                closestFOV = fovDelta
+            }
+        }
+    }
 
-	if (closestDelta == Double.MAX_VALUE || closestDelta < 0 || closestPlayer < 0) return -1
+    if (closestDelta == Double.MAX_VALUE || closestDelta < 0 || closestPlayer < 0) return -1
 
-	if (PERFECT_AIM && allowPerfect && closestFOV <= PERFECT_AIM_FOV && randInt(100 + 1) <= PERFECT_AIM_CHANCE)
-		perfect.set(true)
+    if (PERFECT_AIM && allowPerfect && closestFOV <= PERFECT_AIM_FOV && randInt(100 + 1) <= PERFECT_AIM_CHANCE)
+        perfect.set(true)
 
-	return closestPlayer
+    return closestPlayer
 }
 
 internal fun Entity.canShoot() =
-	spotted()
-		&& !dormant()
-		&& !dead()
-		&& (me.team() != team() || TEAMMATES_ARE_ENEMIES)
-		&& !me.dead()
+    spotted()
+            && !dormant()
+            && !dead()
+            && (me.team() != team() || TEAMMATES_ARE_ENEMIES)
+            && !me.dead()
 
 internal fun Entity.canShootWall() =
-	!dormant()
-		&& !dead()
-		&& (me.team() != team() || TEAMMATES_ARE_ENEMIES)
-		&& !me.dead()
+    !dormant()
+            && !dead()
+            && (me.team() != team() || TEAMMATES_ARE_ENEMIES)
+            && !me.dead()
 
 internal inline fun <R> aimScript(
-	duration: Int, crossinline precheck: () -> Boolean,
-	crossinline doAim: (
-		destinationAngle: Angle,
-		currentAngle: Angle, aimSpeed: Int
-	) -> R
+    duration: Int, crossinline precheck: () -> Boolean,
+    crossinline doAim: (
+        destinationAngle: Angle,
+        currentAngle: Angle, aimSpeed: Int
+    ) -> R
 ) = every(duration) {
-	if (!precheck()) return@every
+    if (!precheck()) return@every
 
-	val aim = ACTIVATE_FROM_FIRE_KEY && keyPressed(FIRE_KEY)
-	val forceAim = keyPressed(FORCE_AIM_KEY)
-	val pressed = aim or forceAim or ENABLE_RAGE
-	var currentTarget = target.get()
+    val aim = ACTIVATE_FROM_FIRE_KEY && keyPressed(FIRE_KEY)
+    val forceAim = keyPressed(FORCE_AIM_KEY)
+    val pressed = aim or forceAim or ENABLE_RAGE
+    var currentTarget = target.get()
 
-	if (!pressed) {
-		reset()
-		return@every
-	}
+    if (!pressed) {
+        reset()
+        return@every
+    }
 
-	if (!CLASSIC_OFFENSIVE) {
-		val weapon = me.weapon()
-		if (!weapon.pistol && !weapon.automatic && !weapon.shotgun && !weapon.sniper) {
-			reset()
-			return@every
-		}
-	}
+    if (!CLASSIC_OFFENSIVE) {
+        val weapon = me.weapon()
+        if (!weapon.pistol && !weapon.automatic && !weapon.shotgun && !weapon.sniper) {
+            reset()
+            return@every
+        }
+    }
 
-	val currentAngle = clientState.angle()
+    val currentAngle = clientState.angle()
 
-	val position = me.position()
-	if (currentTarget < 0) {
-		currentTarget = findTarget(position, currentAngle, aim)
-		if (currentTarget < 0) {
-			return@every
-		}
-		target.set(currentTarget)
-	}
+    val position = me.position()
+    if (currentTarget < 0) {
+        currentTarget = findTarget(position, currentAngle, aim)
+        if (currentTarget < 0) {
+            return@every
+        }
+        target.set(currentTarget)
+    }
 
-	if (ENABLE_AIM) {
-		if (!currentTarget.canShootWall()) {
-			if (!ENABLE_RAGE) {
-				Thread.sleep(AIM_TARGET_CHANGE_DELAY)
-			}
-			reset()
-			return@every
-		}
+    if (ENABLE_AIM) {
+        if (!currentTarget.canShootWall()) {
+            if (!ENABLE_RAGE) {
+                Thread.sleep(AIM_TARGET_CHANGE_DELAY)
+            }
+            reset()
+            return@every
+        }
 
-		val boneID = bone.get()
-		val bonePosition = currentTarget.bones(boneID)
+        val boneID = bone.get()
+        val bonePosition = currentTarget.bones(boneID)
 
-		val destinationAngle = calculateAngle(me, bonePosition)
-		if (AIM_ASSIST_MODE) destinationAngle.finalize(currentAngle, AIM_ASSIST_STRICTNESS / 100.0)
+        val destinationAngle = calculateAngle(me, bonePosition)
+        if (AIM_ASSIST_MODE) destinationAngle.finalize(currentAngle, AIM_ASSIST_STRICTNESS / 100.0)
 
-		val aimSpeed = AIM_SPEED_MIN + randInt(AIM_SPEED_MAX - AIM_SPEED_MIN)
+        val aimSpeed = AIM_SPEED_MIN + randInt(AIM_SPEED_MAX - AIM_SPEED_MIN)
 
-		if (!ENABLE_RAGE && currentTarget.canShoot()) {
-			doAim(destinationAngle, currentAngle, aimSpeed)
-		} else {
-			doAim(destinationAngle, currentAngle, 1)
-			if (currentTarget.canShoot()) click() else reset()
-		}
-	}
+        if (!ENABLE_RAGE && currentTarget.canShoot()) {
+            doAim(destinationAngle, currentAngle, aimSpeed)
+        } else {
+            doAim(destinationAngle, currentAngle, 1)
+            if (currentTarget.canShoot()) click() else reset()
+        }
+    }
 }

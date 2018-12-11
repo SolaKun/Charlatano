@@ -37,96 +37,96 @@ import java.util.*
 const val SETTINGS_DIRECTORY = "settings"
 
 fun main(args: Array<String>) {
-	setKotlinCompilerPath()
-	setIdeaIoUseFallback()
+    setKotlinCompilerPath()
+    setIdeaIoUseFallback()
 
-	loadSettings()
+    loadSettings()
 
-	CSGO.initialize()
+    CSGO.initialize()
 
-	bunnyHop()
-	rcs()
-	esp()
-	flatAim()
-	pathAim()
-	boneTrigger()
-	reducedFlash()
-	bombTimer()
+    bunnyHop()
+    rcs()
+    esp()
+    flatAim()
+    pathAim()
+    boneTrigger()
+    reducedFlash()
+    bombTimer()
 
-	Toggles_AIM()
-	Toggles_BUNNYHOP()
-	Toggles_ESP()
-	Toggles_RAGE()
-	Toggles_RCS()
-	Toggles_BONETRIGGER()
+    Toggles_AIM()
+    Toggles_BUNNYHOP()
+    Toggles_ESP()
+    Toggles_RAGE()
+    Toggles_RCS()
+    Toggles_BONETRIGGER()
 
-	clearScreen()
+    clearScreen()
 
-	val scanner = Scanner(System.`in`)
-	while (!Thread.interrupted()) {
-		System.out.println()
-		System.out.print("> ")
-		when (scanner.nextLine()) {
-			"exit", "quit", "e", "q" -> System.exit(0)
-			"reload", "r" -> loadSettings()
-			"reset" -> resetToggles()
-			"toggles", "t" -> printToggles()
-			"cls", "clear", "c" -> clearScreen()
-			"ranks" -> getRanks()
-		}
-	}
+    val scanner = Scanner(System.`in`)
+    while (!Thread.interrupted()) {
+        System.out.println()
+        System.out.print("> ")
+        when (scanner.nextLine()) {
+            "exit", "quit", "e", "q" -> System.exit(0)
+            "reload", "r" -> loadSettings()
+            "reset" -> resetToggles()
+            "toggles", "t" -> printToggles()
+            "cls", "clear", "c" -> clearScreen()
+            "ranks" -> getRanks()
+        }
+    }
 }
 
 private fun loadSettings() {
-	Files.walk(Paths.get(SETTINGS_DIRECTORY)).forEach { scriptPath ->
-		Dojo.script(
-			Files.readAllBytes(scriptPath).toString(Charsets.UTF_8)
-		)
-	}
+    Files.walk(Paths.get(SETTINGS_DIRECTORY)).forEach { scriptPath ->
+        Dojo.script(
+            Files.readAllBytes(scriptPath).toString(Charsets.UTF_8)
+        )
+    }
 
-	System.out.println("Loaded settings.")
+    System.out.println("Loaded settings.")
 
-	val needsOverlay = ENABLE_BOMB_TIMER or (ENABLE_ESP and (SKELETON_ESP or BOX_ESP))
-	if (!Overlay.opened && needsOverlay) Overlay.open()
+    val needsOverlay = ENABLE_BOMB_TIMER or (ENABLE_ESP and (SKELETON_ESP or BOX_ESP))
+    if (!Overlay.opened && needsOverlay) Overlay.open()
 }
 
 private fun resetToggles() {
-	ENABLE_AIM = false
-	ENABLE_BUNNY_HOP = false
-	ENABLE_ESP = false
-	ENABLE_RCS = false
-	ENABLE_BONE_TRIGGER = false
+    ENABLE_AIM = false
+    ENABLE_BUNNY_HOP = false
+    ENABLE_ESP = false
+    ENABLE_RCS = false
+    ENABLE_BONE_TRIGGER = false
 
-	ENABLE_RAGE = false
-	System.out.println("All togglables disabled.")
+    ENABLE_RAGE = false
+    System.out.println("All togglables disabled.")
 }
 
 private fun printToggles() {
-	System.out.println("AIM      = $ENABLE_AIM")
-	System.out.println("BunnyHop = $ENABLE_BUNNY_HOP")
-	System.out.println("ESP      = $ENABLE_ESP")
-	System.out.println("Rage     = $ENABLE_RAGE")
-	System.out.println("RCS      = $ENABLE_RCS")
-	System.out.println("Trigger  = $ENABLE_BONE_TRIGGER")
+    System.out.println("AIM      = $ENABLE_AIM")
+    System.out.println("BunnyHop = $ENABLE_BUNNY_HOP")
+    System.out.println("ESP      = $ENABLE_ESP")
+    System.out.println("Rage     = $ENABLE_RAGE")
+    System.out.println("RCS      = $ENABLE_RCS")
+    System.out.println("Trigger  = $ENABLE_BONE_TRIGGER")
 }
 
 private fun clearScreen() {
-	System.out.println("  =============+========+========================= ")
-	System.out.println(" | Command     | Alias  | Function                |")
-	System.out.println("  =============+========+========================= ")
-	System.out.println(" | clear       | cls, c | Clears console screen   |")
-	System.out.println(" | exit / quit | e, q   | Stops Charlatano        |")
-	System.out.println(" | reload      | r      | Reloads /settings       |")
-	System.out.println(" | reset       |        | Disables all toggles    |")
-	System.out.println(" | toggles     | t      | Show what is toggled    |")
-	System.out.println(" | ranks       |        | Show ranks              |")
-	System.out.println("  =============+========+========================= ")
-	System.out.println()
+    System.out.println("  =============+========+========================= ")
+    System.out.println(" | Command     | Alias  | Function                |")
+    System.out.println("  =============+========+========================= ")
+    System.out.println(" | clear       | cls, c | Clears console screen   |")
+    System.out.println(" | exit / quit | e, q   | Stops Charlatano        |")
+    System.out.println(" | reload      | r      | Reloads /settings       |")
+    System.out.println(" | reset       |        | Disables all toggles    |")
+    System.out.println(" | toggles     | t      | Show what is toggled    |")
+    System.out.println(" | ranks       |        | Show ranks              |")
+    System.out.println("  =============+========+========================= ")
+    System.out.println()
 }
 
 private fun setKotlinCompilerPath() {
-	System.setProperty(
-		"kotlin.compiler.jar",
-		K2JVMCompiler::class.java.protectionDomain.codeSource.location.toURI().path
-	)
+    System.setProperty(
+        "kotlin.compiler.jar",
+        K2JVMCompiler::class.java.protectionDomain.codeSource.location.toURI().path
+    )
 }

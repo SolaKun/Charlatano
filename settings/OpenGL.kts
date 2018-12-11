@@ -16,7 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.charlatano.settings.*
+import com.charlatano.settings.OPENGL_FPS
+import com.charlatano.settings.OPENGL_MSAA_SAMPLES
+import com.charlatano.settings.OPENGL_VSYNC
 
 /**
  * The amount of FPS to run the OpenGL overlay at.

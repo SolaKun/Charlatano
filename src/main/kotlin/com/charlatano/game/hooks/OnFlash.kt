@@ -27,7 +27,7 @@ import com.charlatano.utils.extensions.uint
 import com.charlatano.utils.hook
 
 val onFlash = hook(256) {
-	val me = clientDLL.uint(dwLocalPlayer)
-	if (me > 0 && !me.dead()) csgoEXE.float(me + flFlashMaxAlpha) > 0F
-	else false
+    val me = clientDLL.uint(dwLocalPlayer)
+    if (me > 0 && !me.dead()) csgoEXE.float(me + flFlashMaxAlpha) > 0F
+    else false
 }

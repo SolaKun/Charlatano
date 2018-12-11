@@ -33,54 +33,54 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList
 
 object CharlatanoOverlay : ApplicationAdapter() {
 
-	@Volatile
-	var created: Boolean = false
+    @Volatile
+    var created: Boolean = false
 
-	lateinit var batch: SpriteBatch
-	lateinit var camera: OrthographicCamera
-	lateinit var shapeRenderer: ShapeRenderer
-	lateinit var textRenderer: BitmapFont
+    lateinit var batch: SpriteBatch
+    lateinit var camera: OrthographicCamera
+    lateinit var shapeRenderer: ShapeRenderer
+    lateinit var textRenderer: BitmapFont
 
-	private val bodies = ObjectArrayList<CharlatanoOverlay.() -> Unit>()
+    private val bodies = ObjectArrayList<CharlatanoOverlay.() -> Unit>()
 
-	override fun create() {
-		camera = OrthographicCamera(gameWidth.toFloat(), gameHeight.toFloat()).apply {
-			setToOrtho(true, gameWidth.toFloat(), gameHeight.toFloat())
-		}
-		batch = SpriteBatch().apply { projectionMatrix = camera.combined }
-		shapeRenderer = ShapeRenderer().apply { setAutoShapeType(true) }
-		textRenderer = BitmapFont(true).apply { color = Color.RED }
+    override fun create() {
+        camera = OrthographicCamera(gameWidth.toFloat(), gameHeight.toFloat()).apply {
+            setToOrtho(true, gameWidth.toFloat(), gameHeight.toFloat())
+        }
+        batch = SpriteBatch().apply { projectionMatrix = camera.combined }
+        shapeRenderer = ShapeRenderer().apply { setAutoShapeType(true) }
+        textRenderer = BitmapFont(true).apply { color = Color.RED }
 
-		created = true
-	}
+        created = true
+    }
 
-	override fun render() {
-		gl.apply {
-			glEnable(GL20.GL_BLEND)
-			glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
-			glClearColor(0F, 0F, 0F, 0F)
-			glClear(GL20.GL_COLOR_BUFFER_BIT)
+    override fun render() {
+        gl.apply {
+            glEnable(GL20.GL_BLEND)
+            glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
+            glClearColor(0F, 0F, 0F, 0F)
+            glClear(GL20.GL_COLOR_BUFFER_BIT)
 
-			if (inBackground) return
+            if (inBackground) return
 
-			camera.setToOrtho(true, gameWidth.toFloat(), gameHeight.toFloat())
-			batch.projectionMatrix = camera.combined
-			shapeRenderer.projectionMatrix = camera.combined
+            camera.setToOrtho(true, gameWidth.toFloat(), gameHeight.toFloat())
+            batch.projectionMatrix = camera.combined
+            shapeRenderer.projectionMatrix = camera.combined
 
-			for (i in 0..bodies.size - 1) bodies[i]()
+            for (i in 0..bodies.size - 1) bodies[i]()
 
-			glDisable(GL20.GL_BLEND)
-		}
-	}
+            glDisable(GL20.GL_BLEND)
+        }
+    }
 
-	override fun dispose() {
-		batch.dispose()
-		shapeRenderer.dispose()
-		textRenderer.dispose()
-	}
+    override fun dispose() {
+        batch.dispose()
+        shapeRenderer.dispose()
+        textRenderer.dispose()
+    }
 
-	operator fun invoke(body: CharlatanoOverlay.() -> Unit) {
-		bodies.add(body)
-	}
+    operator fun invoke(body: CharlatanoOverlay.() -> Unit) {
+        bodies.add(body)
+    }
 
 }

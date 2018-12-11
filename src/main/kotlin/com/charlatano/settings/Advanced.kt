@@ -31,10 +31,10 @@ var GAME_PITCH = 0.022 // m_pitch
 var GAME_YAW = 0.022 // m_yaw
 
 val GAME_SENSITIVITY by lazy(LazyThreadSafetyMode.NONE) {
-	val pointer = clientDLL.address + dwSensitivityPtr
-	val value = clientDLL.uint(dwSensitivity) xor pointer
+    val pointer = clientDLL.address + dwSensitivityPtr
+    val value = clientDLL.uint(dwSensitivity) xor pointer
 
-	java.lang.Float.intBitsToFloat(value.toInt()).toDouble()
+    java.lang.Float.intBitsToFloat(value.toInt()).toDouble()
 }
 
 /**

@@ -26,9 +26,9 @@ import com.charlatano.settings.ENABLE_PATH_AIM
 import com.charlatano.utils.pathAim
 
 fun pathAim() = aimScript(AIM_DURATION, { ENABLE_PATH_AIM }) { dest, current, aimSpeed ->
-	pathAim(
-		current, dest, aimSpeed,
-		sensMultiplier = if (me.isScoped()) 1.0 else AIM_STRICTNESS,
-		perfect = perfect.getAndSet(false)
-	)
+    pathAim(
+        current, dest, aimSpeed,
+        sensMultiplier = if (me.isScoped()) 1.0 else AIM_STRICTNESS,
+        perfect = perfect.getAndSet(false)
+    )
 }

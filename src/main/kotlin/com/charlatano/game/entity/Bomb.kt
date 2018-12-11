@@ -41,17 +41,17 @@ internal fun Bomb.defuseTime() = csgoEXE.float(this + flDefuseCountDown)
 internal fun Bomb.defuserPointer(): Long = csgoEXE.uint(this + NetVarOffsets.hBombDefuser)
 
 internal fun Bomb.defuser(): Player {
-	val defuserPointer = defuserPointer()
-	return if (defuserPointer > 0) clientDLL.uint(dwEntityList + ((defuserPointer and 0xFFF) - 1L) * ENTITY_SIZE) else 0
+    val defuserPointer = defuserPointer()
+    return if (defuserPointer > 0) clientDLL.uint(dwEntityList + ((defuserPointer and 0xFFF) - 1L) * ENTITY_SIZE) else 0
 }
 
 internal fun Bomb.owner() = csgoEXE.uint(this + NetVarOffsets.hOwnerEntity)
 
 internal fun Bomb.carrier(): Player {
-	val owner = owner()
-	return if (owner > 0)
-		CSGO.clientDLL.uint(ClientOffsets.dwEntityList + ((owner and 0xFFF) - 1L) * ENTITY_SIZE)
-	else 0
+    val owner = owner()
+    return if (owner > 0)
+        CSGO.clientDLL.uint(ClientOffsets.dwEntityList + ((owner and 0xFFF) - 1L) * ENTITY_SIZE)
+    else 0
 }
 
 internal fun Bomb.plantLocation(): String = carrier().location()

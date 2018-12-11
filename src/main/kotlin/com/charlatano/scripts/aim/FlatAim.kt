@@ -23,5 +23,5 @@ import com.charlatano.settings.ENABLE_FLAT_AIM
 import com.charlatano.utils.writeAim
 
 fun flatAim() = aimScript(AIM_DURATION, { ENABLE_FLAT_AIM }) { dest, current, aimSpeed ->
-	writeAim(current, dest, aimSpeed.toDouble())
+    writeAim(current, dest, aimSpeed.toDouble())
 }

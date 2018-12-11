@@ -26,6 +26,6 @@ import com.charlatano.utils.extensions.uint
 import com.charlatano.utils.hook
 
 val onGround = hook(4) {
-	val me = clientDLL.uint(dwLocalPlayer)
-	me > 0 && !me.dead() && me.onGround()
+    val me = clientDLL.uint(dwLocalPlayer)
+    me > 0 && !me.dead() && me.onGround()
 }

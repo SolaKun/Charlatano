@@ -23,19 +23,19 @@ import javax.script.ScriptEngineManager
 
 object Dojo {
 
-	val engine: ScriptEngine = ScriptEngineManager().getEngineByExtension("kts")
+    val engine: ScriptEngine = ScriptEngineManager().getEngineByExtension("kts")
 
-	fun script(script: String): Any? = engine.eval(script)
+    fun script(script: String): Any? = engine.eval(script)
 
-	inline operator fun <reified T> invoke(function: String) = engine.eval("$function()") as T
+    inline operator fun <reified T> invoke(function: String) = engine.eval("$function()") as T
 
-	operator fun invoke(function: String): Unit = invoke<Unit>(function)
+    operator fun invoke(function: String): Unit = invoke<Unit>(function)
 
-	@Suppress("UNCHECKED_CAST")
-	operator fun <T> get(name: String): T = engine.eval(name) as T
+    @Suppress("UNCHECKED_CAST")
+    operator fun <T> get(name: String): T = engine.eval(name) as T
 
-	operator fun <T> set(name: String, value: T) {
-		engine.eval("$name = $value")
-	}
+    operator fun <T> set(name: String, value: T) {
+        engine.eval("$name = $value")
+    }
 
 }

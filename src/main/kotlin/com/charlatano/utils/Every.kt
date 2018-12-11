@@ -27,21 +27,21 @@ var inBackground = false
 var notInGame = false
 
 inline fun every(
-	duration: Int, continuous: Boolean = false,
-	crossinline body: () -> Unit
+    duration: Int, continuous: Boolean = false,
+    crossinline body: () -> Unit
 ) = every(duration, duration, continuous, body)
 
 inline fun every(
-	minDuration: Int, maxDuration: Int,
-	continuous: Boolean = false,
-	crossinline body: () -> Unit
+    minDuration: Int, maxDuration: Int,
+    continuous: Boolean = false,
+    crossinline body: () -> Unit
 ) = thread {
-	while (!Thread.interrupted()) {
-		if (continuous || !(inBackground && notInGame)) body()
-		Thread.sleep(
-			(if (maxDuration > minDuration)
-				ThreadLocalRandom.current().nextInt(maxDuration - minDuration + 1) + minDuration
-			else minDuration).toLong()
-		)
-	}
+    while (!Thread.interrupted()) {
+        if (continuous || !(inBackground && notInGame)) body()
+        Thread.sleep(
+            (if (maxDuration > minDuration)
+                ThreadLocalRandom.current().nextInt(maxDuration - minDuration + 1) + minDuration
+            else minDuration).toLong()
+        )
+    }
 }

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.charlatano.settings.*
+import com.charlatano.settings.BUNNY_HOP_KEY
 import java.awt.event.KeyEvent
 
 /**
