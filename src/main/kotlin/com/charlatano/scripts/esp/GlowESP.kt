@@ -40,7 +40,7 @@ internal fun glowEsp() = every(4) {
             EntityType.CCSPlayer -> {
                 if (entity.dead() || (!SHOW_DORMANT && entity.dormant())) return@forEntities
 
-				val team = !DANGER_ZONE && (me.team() == entity.team())
+                val team = !DANGER_ZONE && (me.team() == entity.team())
                 val health = Math.max(0, Math.min(255, entity.health() * 2 + 5))
 
                 if (SHOW_ENEMIES && !team) {
