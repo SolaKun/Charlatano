@@ -16,32 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.charlatano.utils
+package com.charlatano.utils.extensions
 
-import java.util.concurrent.ThreadLocalRandom
-import kotlin.concurrent.thread
+import com.badlogic.gdx.utils.IntMap
 
-@Volatile
-var inBackground = false
-@Volatile
-var notInGame = false
+open class EnumLookUpWithDefault<T>(
+	map: Map<Int, T>,
+	private val defaultValue: T
+) {
+	//to get rid of type casting
+	private val valueMap: IntMap<T> = IntMap(map.size)
 
-inline fun every(
-	duration: Int, continuous: Boolean = false,
-	crossinline body: () -> Unit
-) = every(duration, duration, continuous, body)
-
-inline fun every(
-	minDuration: Int, maxDuration: Int,
-	continuous: Boolean = false,
-	crossinline body: () -> Unit
-) = thread {
-	while (!Thread.interrupted()) {
-		if (continuous || !(inBackground && notInGame)) body()
-		Thread.sleep(
-			(if (maxDuration > minDuration)
-				ThreadLocalRandom.current().nextInt(maxDuration - minDuration + 1) + minDuration
-			else minDuration).toLong()
-		)
+	init {
+		map.forEach { k, v -> valueMap.put(k, v) }
 	}
+
+	operator fun get(id: Int) = valueMap[id] ?: defaultValue
+}
+
+open class EnumLookUp<T>(map: Map<Int, T>) {
+	//to get rid of type casting
+	private val valueMap: IntMap<T> = IntMap(map.size)
+
+	init {
+		map.forEach { k, v -> valueMap.put(k, v) }
+	}
+
+	operator fun get(id: Int): T? = valueMap[id]
+	fun getOrDefault(id: Int, default: T): T = valueMap.get(id, default)
+	operator fun get(id: Int, default: T) = getOrDefault(id, default)
 }

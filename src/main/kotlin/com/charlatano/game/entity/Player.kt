@@ -29,7 +29,6 @@ import com.charlatano.game.netvars.NetVarOffsets.dwBoneMatrix
 import com.charlatano.game.netvars.NetVarOffsets.fFlags
 import com.charlatano.game.netvars.NetVarOffsets.hActiveWeapon
 import com.charlatano.game.netvars.NetVarOffsets.iHealth
-import com.charlatano.game.netvars.NetVarOffsets.iShotsFired
 import com.charlatano.game.netvars.NetVarOffsets.lifeState
 import com.charlatano.game.netvars.NetVarOffsets.nTickBase
 import com.charlatano.game.netvars.NetVarOffsets.vecPunch
@@ -81,7 +80,7 @@ internal fun Player.punch(): Angle = readCached(player2Punch) {
 	z = 0.0
 }
 
-internal fun Player.shotsFired(): Int = csgoEXE.int(this + iShotsFired)
+internal fun Player.shotsFired(): Int = csgoEXE.int(this + NetVarOffsets.iShotsFired)
 
 internal fun Player.viewOffset(): Angle = Vector(
 	csgoEXE.float(this + vecViewOffset).toDouble(),

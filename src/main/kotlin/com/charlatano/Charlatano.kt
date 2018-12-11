@@ -60,9 +60,6 @@ fun main(args: Array<String>) {
 	Toggles_RCS()
 	Toggles_BONETRIGGER()
 
-	Thread.sleep(10_000) // wait a bit to catch everything
-	System.gc() // then cleanup
-
 	clearScreen()
 
 	val scanner = Scanner(System.`in`)

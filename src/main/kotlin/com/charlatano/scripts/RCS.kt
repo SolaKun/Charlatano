@@ -35,7 +35,7 @@ private val lastPunch = Vector2()
 private val newPunch = Vector2()
 private val playerPunch = Vector3()
 
-fun rcs() = every(RCS_DURATION) {
+fun rcs() = every(RCS_MIN_DURATION, RCS_MAX_DURATION) {
 	if (me <= 0 || !ENABLE_RCS) return@every
 	val weaponEntity = me.weaponEntity()
 	val weapon = me.weapon(weaponEntity)
@@ -58,7 +58,8 @@ fun rcs() = every(RCS_DURATION) {
 			normalize()
 		}
 		clientState.setAngle(angle)
-		lastPunch.set(playerPunch.x, playerPunch.y)
+		lastPunch.x = playerPunch.x
+		lastPunch.y = playerPunch.y
 
 		if (forceSet) {
 			lastPunch.set(0F, 0F)

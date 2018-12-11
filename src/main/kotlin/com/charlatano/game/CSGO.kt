@@ -26,14 +26,13 @@ import com.charlatano.game.offsets.EngineOffsets.dwInGame
 import com.charlatano.overlay.CharlatanoOverlay
 import com.charlatano.overlay.CharlatanoOverlay.camera
 import com.charlatano.overlay.Overlay
-import com.charlatano.settings.CLASSIC_OFFENSIVE
+import com.charlatano.settings.*
 import com.charlatano.utils.every
 import com.charlatano.utils.extensions.uint
-import com.charlatano.utils.paused
+import com.charlatano.utils.inBackground
 import com.charlatano.utils.retry
 import com.sun.jna.platform.win32.User32
 import com.sun.jna.platform.win32.WinDef
-import com.sun.jna.platform.win32.WinNT
 import org.jire.arrowhead.Module
 import org.jire.arrowhead.Process
 import org.jire.arrowhead.processByName
@@ -65,16 +64,13 @@ object CSGO {
 
 	fun initialize() {
 		retry(128) {
-			csgoEXE = processByName(
-				"csgo.exe", WinNT.PROCESS_QUERY_INFORMATION
-					or WinNT.PROCESS_VM_READ or WinNT.PROCESS_VM_WRITE
-			)!!
+			csgoEXE = processByName(PROCESS_NAME, PROCESS_ACCESS_FLAGS)!!
 		}
 
 		retry(128) {
 			csgoEXE.loadModules()
-			clientDLL = csgoEXE.modules["client_panorama.dll"]!!
-			engineDLL = csgoEXE.modules["engine.dll"]!!
+			clientDLL = csgoEXE.modules[CLIENT_MODULE_NAME]!!
+			engineDLL = csgoEXE.modules[ENGINE_MODULE_NAME]!!
 		}
 
 		val rect = WinDef.RECT()
@@ -109,8 +105,8 @@ object CSGO {
 			lastY = gameY
 		}
 		every(1024, continuous = true) {
-			paused = hwd != user32.GetForegroundWindow()
-			if (paused) return@every
+			inBackground = hwd != user32.GetForegroundWindow()
+			if (inBackground) return@every
 		}
 
 		NetVars.load()
@@ -124,7 +120,7 @@ object CSGO {
 
 			val enginePointer = engineDLL.uint(dwClientState)
 			val inGame = csgoEXE.int(enginePointer + dwInGame) == 6
-			paused = !inGame || myAddress <= 0
+			inBackground = !inGame || myAddress <= 0
 		}
 
 		constructEntities()

@@ -24,7 +24,6 @@ buildscript {
 	ext.gdxVersion = '1.9.9'
 
 	repositories {
-		mavenCentral()
 		jcenter()
 	}
 
@@ -45,7 +44,7 @@ version "1.2.1"
 mainClassName = "com.charlatano.Charlatano"
 
 repositories {
-	mavenCentral()
+	jcenter()
 }
 
 dependencies {

@@ -35,4 +35,5 @@ var RCS_MAX = 1.98
  *
  * Max must always be greater than min. Set to 1 and 1 for perfect control.
  */
-var RCS_DURATION = 32
+var RCS_MIN_DURATION = 8
+var RCS_MAX_DURATION = 16

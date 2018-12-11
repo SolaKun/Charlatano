@@ -16,9 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.charlatano.settings.RCS_DURATION
 import com.charlatano.settings.RCS_MAX
+import com.charlatano.settings.RCS_MAX_DURATION
 import com.charlatano.settings.RCS_MIN
+import com.charlatano.settings.RCS_MIN_DURATION
 
 /**
  * The range of recoil control you want to have applied.
@@ -38,4 +39,5 @@ RCS_MAX = 1.98
  *
  * Max must always be greater than min. Set to 1 and 1 for perfect ("rage") control.
  */
-RCS_DURATION = 32
+RCS_MIN_DURATION = 8
+RCS_MAX_DURATION = 16

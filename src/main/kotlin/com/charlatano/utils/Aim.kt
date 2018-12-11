@@ -97,11 +97,10 @@ fun pathAim(
 		mouseMove((dx / 2).toInt(), (dy / 2).toInt())
 		Thread.sleep(20)
 	} else HumanMouse.fastSteps(mousePos, target) { steps, i ->
-		val point = target
 		mousePos.refresh()
 
-		val tx = point.x - mousePos.x
-		val ty = point.y - mousePos.y
+		val tx = target.x - mousePos.x
+		val ty = target.y - mousePos.y
 
 		var halfIndex = steps / 2
 		if (halfIndex == 0) halfIndex = 1

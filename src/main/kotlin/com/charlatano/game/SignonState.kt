@@ -16,20 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.charlatano.game.hooks
+package com.charlatano.game
 
-import com.charlatano.game.entity.EntityType
-import com.charlatano.game.entity.planted
-import com.charlatano.game.entityByType
-import com.charlatano.utils.hook
+import com.charlatano.utils.extensions.EnumLookUpWithDefault
 
-var location = ""
+enum class SignOnState {
+	MAIN_MENU,
+	CHALLENGE,
+	CONNECTED,
+	NEW,
+	PRE_SPAWN,
+	SPAWN,
+	IN_GAME,
+	CHANGE_LEVEL;
 
-val bombPlanted = hook(8) {
-	val bomb = entityByType(EntityType.CPlantedC4)?.entity ?: return@hook false
-
-	val planted = bomb.planted()
-	if (!planted) location = ""
-
-	planted
+	companion object : EnumLookUpWithDefault<SignOnState>(values().associateBy(SignOnState::ordinal), MAIN_MENU)
 }
