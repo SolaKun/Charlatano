@@ -41,7 +41,7 @@ internal fun glowEsp() = every(4) {
                 if (entity.dead() || (!SHOW_DORMANT && entity.dormant())) return@forEntities
 
 				val team = !DANGER_ZONE && (me.team() == entity.team())
-				val health = entity.health() * 2 + 5
+                val health = Math.max(0, Math.min(255, entity.health() * 2 + 5))
 
                 if (SHOW_ENEMIES && !team) {
                     if (!HEALTH_BASED_GLOW) {
