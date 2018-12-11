@@ -79,6 +79,9 @@ fun main(args: Array<String>) {
 
 private fun loadSettings() {
     Files.walk(Paths.get(SETTINGS_DIRECTORY)).forEach { scriptPath ->
+        if (Files.isDirectory(scriptPath)) {
+            return@forEach
+        }
         Dojo.script(
             Files.readAllBytes(scriptPath).toString(Charsets.UTF_8)
         )
