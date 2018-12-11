@@ -47,7 +47,6 @@ private fun shouldReset() = System.currentTimeMillis() - lastCleanup.get() >= CL
 
 private var state by Delegates.observable(SignOnState.MAIN_MENU) { _, old, new ->
     if (old != new) {
-        //println("state change from : $old to $new")
         if (new == SignOnState.IN_GAME) {
             val gameRulesProxy = CSGO.clientDLL.long(ClientOffsets.dwGameRulesProxy)
             val survivalDecisionType = CSGO.csgoEXE.int(gameRulesProxy + NetVarOffsets.SurvivalGameRuleDecisionTypes)
