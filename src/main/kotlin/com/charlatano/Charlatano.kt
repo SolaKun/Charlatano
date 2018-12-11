@@ -28,19 +28,17 @@ import com.charlatano.scripts.aim.pathAim
 import com.charlatano.scripts.esp.esp
 import com.charlatano.settings.*
 import com.charlatano.utils.Dojo
+import org.jetbrains.kotlin.cli.common.environment.setIdeaIoUseFallback
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
-import java.io.File
-import java.io.FileReader
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.*
 
 const val SETTINGS_DIRECTORY = "settings"
 
 fun main(args: Array<String>) {
-	System.setProperty(
-		"kotlin.compiler.jar",
-		K2JVMCompiler::class.java.protectionDomain.codeSource.location.toURI().path
-	)
-	System.setProperty("idea.io.use.nio2", "true")
+	setKotlinCompilerPath()
+	setIdeaIoUseFallback()
 
 	loadSettings()
 
@@ -83,14 +81,10 @@ fun main(args: Array<String>) {
 }
 
 private fun loadSettings() {
-	File(SETTINGS_DIRECTORY).listFiles().forEach {
-		FileReader(it).use {
-			Dojo.script(
-				it
-					.readLines()
-					.joinToString("\n")
-			)
-		}
+	Files.walk(Paths.get(SETTINGS_DIRECTORY)).forEach { scriptPath ->
+		Dojo.script(
+			Files.readAllBytes(scriptPath).toString(Charsets.UTF_8)
+		)
 	}
 
 	System.out.println("Loaded settings.")
@@ -131,4 +125,11 @@ private fun clearScreen() {
 	System.out.println(" | ranks       |        | Show ranks              |")
 	System.out.println("  =============+========+========================= ")
 	System.out.println()
+}
+
+private fun setKotlinCompilerPath() {
+	System.setProperty(
+		"kotlin.compiler.jar",
+		K2JVMCompiler::class.java.protectionDomain.codeSource.location.toURI().path
+	)
 }
