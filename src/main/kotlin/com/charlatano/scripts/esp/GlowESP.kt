@@ -48,8 +48,8 @@ internal fun glowEsp() = every(4) {
                         glowAddress.glow(ENEMY_COLOR)
                         entity.chams(ENEMY_COLOR)
                     } else {
-                        glowAddress.glow(Color(health, 0, 255 - health))
-                        entity.chams(Color(health, 0, 255 - health))
+                        glowAddress.glow(Color(health, 0, 255 - health, ENEMY_COLOR.alpha))
+                        entity.chams(Color(health, 0, 255 - health, ENEMY_COLOR.alpha))
                     }
                 } else if (SHOW_TEAM && team) {
                     glowAddress.glow(TEAM_COLOR)
