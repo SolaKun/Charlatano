@@ -22,11 +22,11 @@ import com.sun.jna.Native
 
 object CUser32 {
 
-	init {
-		Native.register("user32")
-	}
+    init {
+        Native.register("user32")
+    }
 
-	@JvmStatic
-	external fun mouse_event(dwFlags: Int, dx: Int, dy: Int, dwData: Int, dwExtraInfo: Long)
+    @JvmStatic
+    external fun mouse_event(dwFlags: Int, dx: Int, dy: Int, dwData: Int, dwExtraInfo: Long)
 
 }

@@ -27,16 +27,16 @@ import com.charlatano.utils.randLong
 import org.jire.arrowhead.keyPressed
 
 fun bunnyHop() = onGround {
-	if (ENABLE_BUNNY_HOP && keyPressed(BUNNY_HOP_KEY)) {
-		randScroll()
-		Thread.sleep(8 + randLong(10))
-		randScroll()
-	}
+    if (ENABLE_BUNNY_HOP && keyPressed(BUNNY_HOP_KEY)) {
+        randScroll()
+        Thread.sleep(8 + randLong(10))
+        randScroll()
+    }
 }
 
 private fun randScroll() {
-	Thread.sleep(randLong(1, 4))
-	clientDLL[dwForceJump] = 5.toByte()
-	Thread.sleep(randLong(20, 30))
-	clientDLL[dwForceJump] = 4.toByte()
+    Thread.sleep(randLong(1, 4))
+    clientDLL[dwForceJump] = 5.toByte()
+    Thread.sleep(randLong(20, 30))
+    clientDLL[dwForceJump] = 4.toByte()
 }

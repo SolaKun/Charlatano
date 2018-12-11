@@ -38,16 +38,16 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap
 typealias Entity = Long
 
 internal fun Entity.spotted(): Boolean {
-	val meID = csgoEXE.int(me + dwIndex) - 1
-	val spottedByMask = csgoEXE.uint(this + bSpottedByMask)
-	val result = spottedByMask and (1 shl meID).toLong()
-	return result != 0L
+    val meID = csgoEXE.int(me + dwIndex) - 1
+    val spottedByMask = csgoEXE.uint(this + bSpottedByMask)
+    val result = spottedByMask and (1 shl meID).toLong()
+    return result != 0L
 }
 
 internal fun Entity.dormant(): Boolean = try {
-	csgoEXE.boolean(this + bDormant)
+    csgoEXE.boolean(this + bDormant)
 } catch (t: Throwable) {
-	false
+    false
 }
 
 internal fun Entity.team() = csgoEXE.uint(this + iTeamNum)
@@ -61,7 +61,7 @@ internal fun Entity.studioHdr(): Long = csgoEXE.uint(this + pStudioHdr)
 private val entity2Angle: Long2ObjectMap<Angle> = Long2ObjectOpenHashMap(255)
 
 internal fun Entity.position(): Angle = readCached(entity2Angle) {
-	x = csgoEXE.float(it + vecOrigin).toDouble()
-	y = csgoEXE.float(it + vecOrigin + 4).toDouble()
-	z = csgoEXE.float(it + vecOrigin + 8).toDouble() + csgoEXE.float(it + vecViewOffset + 8)
+    x = csgoEXE.float(it + vecOrigin).toDouble()
+    y = csgoEXE.float(it + vecOrigin + 4).toDouble()
+    z = csgoEXE.float(it + vecOrigin + 8).toDouble() + csgoEXE.float(it + vecViewOffset + 8)
 }

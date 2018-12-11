@@ -21,14 +21,14 @@ package com.charlatano.game
 import com.charlatano.utils.extensions.EnumLookUpWithDefault
 
 enum class SignOnState {
-	MAIN_MENU,
-	CHALLENGE,
-	CONNECTED,
-	NEW,
-	PRE_SPAWN,
-	SPAWN,
-	IN_GAME,
-	CHANGE_LEVEL;
+    MAIN_MENU,
+    CHALLENGE,
+    CONNECTED,
+    NEW,
+    PRE_SPAWN,
+    SPAWN,
+    IN_GAME,
+    CHANGE_LEVEL;
 
-	companion object : EnumLookUpWithDefault<SignOnState>(values().associateBy(SignOnState::ordinal), MAIN_MENU)
+    companion object : EnumLookUpWithDefault<SignOnState>(values().associateBy(SignOnState::ordinal), MAIN_MENU)
 }
