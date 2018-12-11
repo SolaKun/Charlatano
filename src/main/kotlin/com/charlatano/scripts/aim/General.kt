@@ -85,17 +85,22 @@ internal fun findTarget(
     return closestPlayer
 }
 
+internal fun Entity.inMyTeam() =
+    !TEAMMATES_ARE_ENEMIES && if (DANGER_ZONE) {
+        me.survivalTeam().let { it > -1 && it == this.survivalTeam() }
+    } else me.team() == team()
+
 internal fun Entity.canShoot() =
-    spotted()
+    (spotted() || TEAMMATES_ARE_ENEMIES || DANGER_ZONE)
             && !dormant()
             && !dead()
-            && (me.team() != team() || TEAMMATES_ARE_ENEMIES)
+            && !inMyTeam()
             && !me.dead()
 
 internal fun Entity.canShootWall() =
     !dormant()
             && !dead()
-            && (me.team() != team() || TEAMMATES_ARE_ENEMIES)
+            && !inMyTeam()
             && !me.dead()
 
 internal inline fun <R> aimScript(
