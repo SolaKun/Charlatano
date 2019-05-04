@@ -19,7 +19,6 @@
 package com.charlatano.scripts
 
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.math.Vector3
 import com.charlatano.game.angle
 import com.charlatano.game.clientState
 import com.charlatano.game.entity.*
@@ -33,7 +32,7 @@ import com.charlatano.utils.randDouble
 
 private val lastPunch = Vector2()
 private val newPunch = Vector2()
-private val playerPunch = Vector3()
+private val playerPunch = Vector2()
 
 fun rcs() = every(RCS_MIN_DURATION, RCS_MAX_DURATION) {
     if (me <= 0 || !ENABLE_RCS) return@every
@@ -42,9 +41,9 @@ fun rcs() = every(RCS_MIN_DURATION, RCS_MAX_DURATION) {
     if (!weapon.automatic) return@every
     val shotsFired = me.shotsFired()
     val forceSet = shotsFired == 0 && !lastPunch.isZero
-    if (forceSet || shotsFired > 0 || weaponEntity.bullets() < 1) {
+    if (forceSet || shotsFired > 2 || weaponEntity.bullets() < 1) {
         val p = me.punch()
-        playerPunch.set(p.x.toFloat(), p.y.toFloat(), p.z.toFloat())
+        playerPunch.set(p.x.toFloat(), p.y.toFloat())
         newPunch.set(playerPunch.x - lastPunch.x, playerPunch.y - lastPunch.y)
         newPunch.scl(
             (if (RCS_MAX > RCS_MIN) randDouble(RCS_MIN, RCS_MAX) else RCS_MIN).toFloat(),
